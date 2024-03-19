@@ -4,18 +4,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BookingHomestay.Infrastructure.Repositories
 {
-    public class RoomRepository : IRoomRepository
+    public class RoomRepository : RepositoryBase<BookingHomestay.Domain.Entities.Room.Room>, IRoomRepository
     {
-        readonly BookingHomestayDbContext context;
+        BookingHomestayDbContext dbcontext;
 
-        public RoomRepository(BookingHomestayDbContext context)
+        public RoomRepository(BookingHomestayDbContext context) : base(context)
         {
-            this.context = context;
-        }
-
-        public async Task<List<BookingHomestay.Domain.Entities.Room.Room>> GetAllAsync()
-        {
-            return await context.Rooms.ToListAsync();
+            this.dbcontext = context;
         }
 
     }

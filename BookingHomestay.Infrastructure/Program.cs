@@ -1,6 +1,9 @@
+using BookingHomestay.Domain.Entities.Room;
 using BookingHomestay.Infrastructure;
 using BookingHomestay.Infrastructure.Context;
+using BookingHomestay.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,7 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 //
 
-Dependencies.ConfigureServices(builder.Configuration, builder.Services);
+
 
 var app = builder.Build();
 
