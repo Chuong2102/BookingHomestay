@@ -1,4 +1,4 @@
-﻿using BookingHomestay.API.Services;
+﻿using BookingHomestay.API.Services.Room;
 using BookingHomestay.Domain.Entities.Room;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

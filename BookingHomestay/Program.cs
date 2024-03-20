@@ -1,4 +1,4 @@
-using BookingHomestay.API.Services;
+using BookingHomestay.API.Services.Room;
 using BookingHomestay.Domain.Entities.Room;
 using BookingHomestay.Domain.Interfaces;
 using BookingHomestay.Infrastructure.Repositories;

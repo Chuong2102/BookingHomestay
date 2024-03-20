@@ -2,7 +2,7 @@
 using BookingHomestay.Domain.Interfaces;
 using BookingHomestay.Infrastructure.Repositories;
 
-namespace BookingHomestay.API.Services
+namespace BookingHomestay.API.Services.Room
 {
     public class RoomService : IRoomService
     {
@@ -12,9 +12,9 @@ namespace BookingHomestay.API.Services
             this.roomRepository = roomRepository;
         }
 
-        public async Task<List<Room>> GetAllRoomsAsync()
+        public async Task<List<Domain.Entities.Room.Room>> GetAllRoomsAsync()
         {
-            return await  roomRepository.GetAllAsync();
+            return await roomRepository.GetAllAsync();
         }
     }
 }

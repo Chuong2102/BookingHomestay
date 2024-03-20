@@ -25,4 +25,8 @@
     <ProjectReference Include="..\BookingHomestay.Infrastructure\BookingHomestay.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="DTOs\" />
+  </ItemGroup>
+
 </Project>
