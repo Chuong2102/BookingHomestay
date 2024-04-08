@@ -1,92 +1,53 @@
 import React, { Component } from 'react';
-import Clothes from './Clothes';
+import Container from './Container';
+import RoomCard from './listroom/RoomCard'
+import {useCallback} from 'react';
+import axios from 'axios';
+import { useState, useEffect } from 'react';
 
-const USDtoVND = function (props) {
-    const convert = function (usd) {
-        return usd * 23632;
-    };
+const Home = () => {
 
-    return (
-        <div>
-            <span>
-                USD
-            </span>
-            <input
-                onChange={(e) => {
-                    const usd = e.target.value;
-                    const vnd = convert(usd);
-                    props.onHandleChange({
-                        usd,
-                        vnd
-                    });
+    const [rooms, setRooms] = useState([]);
+    const [page, setPage] = useState(1);
+    const apiEx = `https://localhost:7188/api/Room`;
+    const [hasMore, setHasMore] = useState(true); // Track if there are more posts to load
 
-                }}
-                value={props.value}
-            />
-        </div>
-    );
-};
+    useEffect(() => {
+        const fetchRooms = async () => {
+            try {
+                const response = await axios.post(apiEx);
+                const data = response.data;
 
-const VNDtoUSD = function (props) {
-    const convert = function (vnd) {
-        return vnd / 23632;
-    };
-
-    return (
-        <div>
-            <span> VND </span>
-            <input onChange={(e) => {
-                const vnd = e.target.value;
-                const usd = convert(vnd);
-                props.onHandleChange({
-                    usd,
-                    vnd
-                });
-            }}
-
-            value={props.value}
-            />
-        </div>
-    )
-}
-
-
-export class Home extends Component {
-    static displayName = Home.name;
-
-    constructor(props) {
-        super(props);
-        this.state = { index: 1, usd: 0, vnd: 0};
-
-    }
-
-    handleChange = (data) => {
-        this.setState(data);
-    }
-
-  render() {
-      return (
-        <div>
-            <p>Gia tri {this.state.index} </p>
-            <button className="btn btn-primary" onClick={() => this.setState({ index: this.state.index + 1 })}>Up</button>
-            <br></br>
-            <br></br>
-              <button className="btn btn-primary" onClick={() => this.setState({ index: this.state.index - 1 })}>Down</button>
-              <br></br>
-
-              <div>
+                console.log(data);
                 
-              </div>
+                // Update posts state with new data
+                setRooms(data);
 
-              <div>
-                  <Clothes name="Jeans" type="Skinny" color="Black" >Quan jeans</Clothes>
-              </div>
+                // Check if there are more posts to load
+                if (data.length === 0) {
+                    setHasMore(false);
+                }
+            } catch (error) {
+                console.error('Error fetching rooms:', error);
+            }
+        };
 
-              <div style={{ margin: "3%" }}>
-                  <USDtoVND onHandleChange={this.handleChange} value={this.state.usd} />
-                  <VNDtoUSD onHandleChange={this.handleChange} value={this.state.vnd} />
-              </div>
-        </div>
+        fetchRooms();
+    }, []);
+
+    return (
+        <Container>
+            <div className=' pt-[150px] grid gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-5 '>
+                {
+                    rooms.map(
+                        (room, index) => (
+                            <RoomCard key={index} Room={room}/>
+                        )
+                    )
+                }
+            </div>
+        </Container>
     );
-  }
 }
+
+export default Home;

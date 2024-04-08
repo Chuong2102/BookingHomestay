@@ -1,5 +1,7 @@
 import {AiOutlineMenu} from 'react-icons/ai';
 import {useCallback, useState} from 'react';
+import Avatar from './Avatar';
+import MenuItem from './MenuItem';
 
 const UserMenu = () => {
     
@@ -13,13 +15,19 @@ const UserMenu = () => {
     return(
         <div className="relative">
             <div onClick={toggleOpen} className="flex flex-row p-2 border-[1px]  items-center gap-3 cursor-pointer transition hover:bg-neutral-100 rounded-full">
-                <div className="p-1 bg-black text-white rounded-full text-center text-sm h-8 w-8">
-                        C
-                </div>
+                <Avatar></Avatar>
                 <div className="transition rounded">
                     <AiOutlineMenu/>
                 </div>
             </div>
+            {isOpen && (
+                <div className=' absolute rounded-xl shadow-sm w-36 top-14 right-0 overflow-hidden text-sm'>
+                    <div className='flex flex-col cursor-pointer'>
+                        <MenuItem label="Login"/>
+                        <MenuItem label="Sign Up"/>
+                    </div>
+                </div>    
+            )}
         </div>
     );
 }

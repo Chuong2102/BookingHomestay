@@ -3,3 +3,6 @@
 @tailwind utilities;
 
 .pointer {cursor: pointer;}
+body {
+    font-family: "Nunito", sans-serif;
+}

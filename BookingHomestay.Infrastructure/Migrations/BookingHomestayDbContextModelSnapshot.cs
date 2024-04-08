@@ -55,7 +55,7 @@ namespace BookingHomestay.Infrastructure.Migrations
 
                     b.HasIndex("ProvinceID");
 
-                    b.ToTable("Rooms");
+                    b.ToTable("Rooms", (string)null);
 
                     b.HasData(
                         new
@@ -83,7 +83,7 @@ namespace BookingHomestay.Infrastructure.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Provinces");
+                    b.ToTable("Provinces", (string)null);
                 });
 
             modelBuilder.Entity("BookingHomestay.Domain.Entities.Room.Room", b =>
@@ -92,7 +92,7 @@ namespace BookingHomestay.Infrastructure.Migrations
                         .WithMany()
                         .HasForeignKey("ProvinceID");
 
-                    b.OwnsOne("BookingHomestay.Domain.Entities.Room.Address", "Address", b1 =>
+                    b.OwnsOne("BookingHomestay.Domain.Entities.Room.Room.Address#BookingHomestay.Domain.Entities.Room.Address", "Address", b1 =>
                         {
                             b1.Property<int>("RoomID")
                                 .HasColumnType("int");
@@ -113,13 +113,13 @@ namespace BookingHomestay.Infrastructure.Migrations
 
                             b1.HasKey("RoomID");
 
-                            b1.ToTable("Rooms");
+                            b1.ToTable("Rooms", (string)null);
 
                             b1.WithOwner()
                                 .HasForeignKey("RoomID");
                         });
 
-                    b.OwnsOne("BookingHomestay.Domain.Entities.RoomAggregate.Location", "Location", b1 =>
+                    b.OwnsOne("BookingHomestay.Domain.Entities.Room.Room.Location#BookingHomestay.Domain.Entities.RoomAggregate.Location", "Location", b1 =>
                         {
                             b1.Property<int>("RoomID")
                                 .HasColumnType("int");
@@ -138,7 +138,7 @@ namespace BookingHomestay.Infrastructure.Migrations
 
                             b1.HasKey("RoomID");
 
-                            b1.ToTable("Rooms");
+                            b1.ToTable("Rooms", (string)null);
 
                             b1.WithOwner()
                                 .HasForeignKey("RoomID");
