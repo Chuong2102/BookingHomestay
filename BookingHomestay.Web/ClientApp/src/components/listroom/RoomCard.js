@@ -18,7 +18,7 @@ const RoomCard = ({Room}) => {
                     <div className=" absolute top-3 right-3">
                         <HeartButton/>
                     </div>
-                    <div className=" font-semibold text-lg">
+                    <div className=" font-semibold text-lg min-h-14">
                         {Room.title}
                     </div>
                     <div className=" font-light text-sm text-neutral-500">
@@ -48,7 +48,7 @@ const RoomCard = ({Room}) => {
                     <div className=" absolute top-3 right-3">
                         <HeartButton/>
                     </div>
-                    <div className=" font-semibold text-lg ">
+                    <div className=" font-semibold text-lg min-h-14">
                         {Room.title}
                     </div>
                     <div className=" font-light text-sm text-neutral-500">

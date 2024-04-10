@@ -4,6 +4,8 @@ import RoomCard from './listroom/RoomCard'
 import {useCallback} from 'react';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
+import { Link } from 'react-feather';
+import { NavLink } from "react-router-dom";
 
 const Home = () => {
 
@@ -41,7 +43,9 @@ const Home = () => {
                 {
                     rooms.map(
                         (room, index) => (
-                            <RoomCard key={index} Room={room}/>
+                            <NavLink to={`/detail/${room.id}`} key={index}>
+                                <RoomCard key={index} Room={room}/>
+                            </NavLink>
                         )
                     )
                 }

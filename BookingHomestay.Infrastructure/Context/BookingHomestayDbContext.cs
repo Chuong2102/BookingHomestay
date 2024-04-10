@@ -1,4 +1,5 @@
-﻿using BookingHomestay.Domain.Entities.Room;
+﻿using BookingHomestay.Domain.Entities.CommonEnities;
+using BookingHomestay.Domain.Entities.Room;
 using BookingHomestay.Domain.Entities.RoomAggregate;
 using BookingHomestay.Domain.EntitiesConfiguration;
 using Microsoft.EntityFrameworkCore;
@@ -15,6 +16,7 @@ namespace BookingHomestay.Infrastructure.Context
 
         public DbSet<Room> Rooms { get; set; }
         public DbSet<Province> Provinces { get; set; }
+        public DbSet<Photos> Photos { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

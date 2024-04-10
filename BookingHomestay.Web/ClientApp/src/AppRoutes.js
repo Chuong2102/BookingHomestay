@@ -1,6 +1,8 @@
 import { Counter } from "./components/Counter";
 import { FetchData } from "./components/FetchData";
 import Home from "./components/Home";
+import Room from "./components/addpost/Room";
+import RoomPage from "./components/listroom/room/roomPage";
 
 const AppRoutes = [
   {
@@ -14,6 +16,14 @@ const AppRoutes = [
   {
     path: '/fetch-data',
     element: <FetchData />
+  },
+  {
+    path: '/detail/:id',
+    element: <RoomPage/>
+  },
+  {
+    path: '/addRoom',
+    element: <Room/>
   }
 ];
 

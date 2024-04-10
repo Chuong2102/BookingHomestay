@@ -21,5 +21,11 @@ namespace BookingHomestay.API.Controllers
         {
             return await roomService.GetAllRoomsAsync();
         }
+
+        [HttpGet]
+        public async Task<Room> GetRoomByID(int id)
+        {
+            return await roomService.GetRoomAsync(id);
+        }
     }
 }
