@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import Logo from './Logo';
 import Search from './Search';
 import UserMenu from './UserMenu';
+import Categories from './Categories';
 
 export class NavMenu extends Component {
   static displayName = NavMenu.name;
@@ -37,6 +38,7 @@ export class NavMenu extends Component {
             </div>
           </Container>
         </div>
+        <Categories/>
       </div>
     );
   }

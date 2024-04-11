@@ -7,7 +7,6 @@ const Search = () => {
             border-[1px] 
             w-full 
             md:w-auto 
-            py-2 
             rounded-full 
             shadow-sm 
             hover:shadow-md 
@@ -17,10 +16,11 @@ const Search = () => {
         >
           <div 
             className="
-              flex 
-              flex-row 
-              items-center 
+              flex
+              flex-row
+              items-center
               justify-between
+              h-full
             "
           >
             <div 
@@ -28,6 +28,8 @@ const Search = () => {
                 text-sm 
                 font-semibold 
                 px-6
+                py-[11px]
+                h-full rounded-full hover:bg-neutral-100 
               "
             >
               Địa điểm
@@ -39,9 +41,11 @@ const Search = () => {
                 text-sm 
                 font-semibold 
                 px-6 
-                border-x-[1px] 
+                py-[11px]
                 flex-1 
-                text-center
+                text-center rounded-full
+              hover:bg-neutral-200
+                hover:border-none
               "
             >
               Tuần 
@@ -50,12 +54,15 @@ const Search = () => {
               className="
                 text-sm 
                 pl-6 
-                pr-2 
+                py-1
+                pr-1
                 text-gray-600 
                 flex 
                 flex-row 
                 items-center 
                 gap-3
+              hover:bg-neutral-200 rounded-full
+                h-full
               "
             >
               <div className="hidden sm:block">Khách</div>
