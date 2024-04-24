@@ -3,6 +3,8 @@ import { useState, useEffect, useRef } from 'react';
 import Container from '../../Container';
 import RoomHead from '../RoomHead';
 import axios from 'axios';
+import TitlebarBelowMasonryImageList from '../../images/listImages';
+import RoomInfo from './roomInfo';
 
 const RoomPage = () => {
     const { id } = useParams();
@@ -11,6 +13,12 @@ const RoomPage = () => {
 
     const apiEx = `https://localhost:7188/api/Room/?id=${id}`;
     console.log(id);
+
+    const initialDateRange = {
+        startDate: new Date(),
+        endDate: new Date(),
+        key: 'selection'
+    };
 
     useEffect(() => {
         const fetchData = async () => {
@@ -33,7 +41,12 @@ const RoomPage = () => {
             <div className='pt-[150px] max-w-screen-lg mx-auto'>
                 <div className='flex flex-col gap-6'>
                     <RoomHead title = {room.title} id={room.id} imageSrc={imgSrc} userID={room.userID}/>
-                    <img className=' object-cover w-full' src="./images/208111834.jpg"></img>
+                    <div className='w-full'>
+                        <TitlebarBelowMasonryImageList className="w-full"/>
+                    </div>
+                    <div className='grid grid-cols-1 md:grid-cols-7 md:gap-10 mt-6'>
+                        <RoomInfo category={room.category}/>
+                    </div>
                 </div>
             </div>
         </Container>

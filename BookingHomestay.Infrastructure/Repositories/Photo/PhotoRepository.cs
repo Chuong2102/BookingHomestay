@@ -3,7 +3,7 @@ using BookingHomestay.Infrastructure.Context;
 
 namespace BookingHomestay.Infrastructure.Repositories.Photo
 {
-    public class PhotoRepository : RepositoryBase<Photos>, IPhotoRepository
+    public class PhotoRepository : RepositoryBase<Domain.Entities.CommonEnities.Photo>, IPhotoRepository
     {
         BookingHomestayDbContext dbcontext;
         public PhotoRepository(BookingHomestayDbContext context) : base(context)
@@ -21,7 +21,7 @@ namespace BookingHomestay.Infrastructure.Repositories.Photo
             throw new NotImplementedException();
         }
 
-        public Task<List<Photos>> GetAllByRoomID(int roomID)
+        public Task<List<Domain.Entities.CommonEnities.Photo>> GetAllByRoomID(int roomID)
         {
             throw new NotImplementedException();
         }

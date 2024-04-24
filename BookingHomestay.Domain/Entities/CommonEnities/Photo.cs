@@ -1,8 +1,8 @@
 ﻿namespace BookingHomestay.Domain.Entities.CommonEnities
 {
-    public class Photos : BaseEntity
+    public class Photo : BaseEntity
     {
-        public Photos() { }
+        public Photo() { }
         public Room.Room? Room { get; set; }
         public string? Path { get; set; }
         public string Title { get; set; }
