@@ -13,8 +13,8 @@ using NetTopologySuite.Geometries;
 namespace BookingHomestay.Infrastructure.Migrations
 {
     [DbContext(typeof(BookingHomestayDbContext))]
-    [Migration("20240409220355_InitialPhotoEntity")]
-    partial class InitialPhotoEntity
+    [Migration("20240424034240_InitialDB")]
+    partial class InitialDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -25,7 +25,7 @@ namespace BookingHomestay.Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("BookingHomestay.Domain.Entities.CommonEnities.Photos", b =>
+            modelBuilder.Entity("BookingHomestay.Domain.Entities.CommonEnities.Photo", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -98,9 +98,61 @@ namespace BookingHomestay.Infrastructure.Migrations
                             Area = 100.0,
                             Description = "Homestay gia re",
                             Price = 500000m,
-                            Title = "Homestay gia re gan trung tam thanh pho Hue",
+                            Title = "Tam An Homestay",
                             UserID = 1
+                        },
+                        new
+                        {
+                            ID = 2,
+                            Area = 260.0,
+                            Description = "Homestay gia re",
+                            Price = 450000m,
+                            Title = "ChocoHouse",
+                            UserID = 2
+                        },
+                        new
+                        {
+                            ID = 3,
+                            Area = 400.0,
+                            Description = "Homestay gia re",
+                            Price = 350000m,
+                            Title = "Dory Homestay",
+                            UserID = 3
+                        },
+                        new
+                        {
+                            ID = 4,
+                            Area = 800.0,
+                            Description = "Homestay gia re",
+                            Price = 220000m,
+                            Title = "The Dreamers Homestay",
+                            UserID = 4
                         });
+                });
+
+            modelBuilder.Entity("BookingHomestay.Domain.Entities.RoomAggregate.Category", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Label")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("BookingHomestay.Domain.Entities.RoomAggregate.Province", b =>
@@ -120,7 +172,22 @@ namespace BookingHomestay.Infrastructure.Migrations
                     b.ToTable("Provinces");
                 });
 
-            modelBuilder.Entity("BookingHomestay.Domain.Entities.CommonEnities.Photos", b =>
+            modelBuilder.Entity("CategoryRoom", b =>
+                {
+                    b.Property<int>("CategoriesID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RoomsID")
+                        .HasColumnType("int");
+
+                    b.HasKey("CategoriesID", "RoomsID");
+
+                    b.HasIndex("RoomsID");
+
+                    b.ToTable("CategoryRoom");
+                });
+
+            modelBuilder.Entity("BookingHomestay.Domain.Entities.CommonEnities.Photo", b =>
                 {
                     b.HasOne("BookingHomestay.Domain.Entities.Room.Room", "Room")
                         .WithMany()
@@ -160,6 +227,40 @@ namespace BookingHomestay.Infrastructure.Migrations
 
                             b1.WithOwner()
                                 .HasForeignKey("RoomID");
+
+                            b1.HasData(
+                                new
+                                {
+                                    RoomID = 1,
+                                    AddressLine1 = "56 Kiet 93 An Duong Vuong",
+                                    AddressLine2 = "Thanh pho Hue, Tinh Thua Thien Hue",
+                                    City = "Hue",
+                                    PostalCare = "49000"
+                                },
+                                new
+                                {
+                                    RoomID = 2,
+                                    AddressLine1 = "20 Nguyễn Tri Phương",
+                                    AddressLine2 = "Phường Phú Nhuận, Thành phố Huế, Tỉnh Thừa Thiên Huế",
+                                    City = "Hue",
+                                    PostalCare = "49000"
+                                },
+                                new
+                                {
+                                    RoomID = 3,
+                                    AddressLine1 = "73 Thạch Hãn",
+                                    AddressLine2 = "Thanh pho Hue, Tinh Thua Thien Hue",
+                                    City = "Hue",
+                                    PostalCare = "49000"
+                                },
+                                new
+                                {
+                                    RoomID = 4,
+                                    AddressLine1 = "106 Hải Triều",
+                                    AddressLine2 = "Thanh pho Hue, Tinh Thua Thien Hue",
+                                    City = "Hue",
+                                    PostalCare = "49000"
+                                });
                         });
 
                     b.OwnsOne("BookingHomestay.Domain.Entities.RoomAggregate.Location", "Location", b1 =>
@@ -185,6 +286,36 @@ namespace BookingHomestay.Infrastructure.Migrations
 
                             b1.WithOwner()
                                 .HasForeignKey("RoomID");
+
+                            b1.HasData(
+                                new
+                                {
+                                    RoomID = 1,
+                                    Latitude = 16.452226317000054,
+                                    Longitude = 107.60572747100008,
+                                    PlaceID = ""
+                                },
+                                new
+                                {
+                                    RoomID = 2,
+                                    Latitude = 16.464479972000049,
+                                    Longitude = 107.59203459400004,
+                                    PlaceID = ""
+                                },
+                                new
+                                {
+                                    RoomID = 3,
+                                    Latitude = 16.471000728000035,
+                                    Longitude = 107.57140013500003,
+                                    PlaceID = ""
+                                },
+                                new
+                                {
+                                    RoomID = 4,
+                                    Latitude = 16.455358346983619,
+                                    Longitude = 107.6071873579871,
+                                    PlaceID = ""
+                                });
                         });
 
                     b.Navigation("Address");
@@ -192,6 +323,21 @@ namespace BookingHomestay.Infrastructure.Migrations
                     b.Navigation("Location");
 
                     b.Navigation("Province");
+                });
+
+            modelBuilder.Entity("CategoryRoom", b =>
+                {
+                    b.HasOne("BookingHomestay.Domain.Entities.RoomAggregate.Category", null)
+                        .WithMany()
+                        .HasForeignKey("CategoriesID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BookingHomestay.Domain.Entities.Room.Room", null)
+                        .WithMany()
+                        .HasForeignKey("RoomsID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

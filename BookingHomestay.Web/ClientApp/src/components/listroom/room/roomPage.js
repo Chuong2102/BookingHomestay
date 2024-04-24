@@ -5,6 +5,7 @@ import RoomHead from '../RoomHead';
 import axios from 'axios';
 import TitlebarBelowMasonryImageList from '../../images/listImages';
 import RoomInfo from './roomInfo';
+import RoomReservation from './RoomServation';
 
 const RoomPage = () => {
     const { id } = useParams();
@@ -46,6 +47,9 @@ const RoomPage = () => {
                     </div>
                     <div className='grid grid-cols-1 md:grid-cols-7 md:gap-10 mt-6'>
                         <RoomInfo category={room.category}/>
+                        <div className='mb-10 md:order-last md:col-span-3'>
+                            <RoomReservation price={room.price} />
+                        </div>
                     </div>
                 </div>
             </div>

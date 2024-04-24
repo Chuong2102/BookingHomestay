@@ -34,7 +34,7 @@ const RegisterModel = () => {
 
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="w-full relative">
-                    <input type="text" name="email" {...register("email")} className={`peer w-full p-4 mb-4 pt-6 font-light bg-white border-2 rounded-md outline-none transition disabled:opacity-70 disabled:cursor-not-allowed`}/>
+                    <input type="email" name="email" {...register("email")} className={`peer w-full p-4 mb-4 pt-6 font-light bg-white border-2 rounded-md outline-none transition disabled:opacity-70 disabled:cursor-not-allowed`}/>
                     <label className="absolute text-md duration-150 transform -translate-y-3 top-5 z-10 origin-[0] left-4 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4 text-zinc-400">
                         Email
                     </label>
@@ -48,7 +48,7 @@ const RegisterModel = () => {
                 </div>
 
                 <div className="w-full relative">
-                    <input type="text" name="password" {...register("password")} className={`peer w-full p-4 mb-4 pt-6 font-light bg-white border-2 rounded-md outline-none transition disabled:opacity-70 disabled:cursor-not-allowed`}/>
+                    <input type="password" name="password" {...register("password")} className={`peer w-full p-4 mb-4 pt-6 font-light bg-white border-2 rounded-md outline-none transition disabled:opacity-70 disabled:cursor-not-allowed`}/>
                     <label className="absolute text-md duration-150 transform -translate-y-3 top-5 z-10 origin-[0] left-4 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4 text-zinc-400">
                         Mật khẩu
                     </label>
