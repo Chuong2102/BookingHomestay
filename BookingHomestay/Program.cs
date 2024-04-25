@@ -1,13 +1,18 @@
+using BookingHomestay.API.Services.Authentication;
 using BookingHomestay.API.Services.Room;
+using BookingHomestay.API.Services.User;
 using BookingHomestay.Domain.Entities.Room;
 using BookingHomestay.Domain.Interfaces;
 using BookingHomestay.Infrastructure.Repositories;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.Hosting;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddTransient<IRoomService, RoomService>();
+builder.Services.AddTransient<IUserService, UserService>();
+
 builder.Services.RegisterServices();
 
 
@@ -32,6 +37,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+app.UseAuthentication();
 
 app.UseCors(x => x
     .AllowAnyMethod()

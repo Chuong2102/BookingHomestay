@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import AppRoutes from './AppRoutes';
-import { Layout } from './components/Layout';
+import  Layout  from './components/Layout';
 import './custom.css';
 import { configureStore } from "@reduxjs/toolkit";
 import {Provider} from 'react-redux';

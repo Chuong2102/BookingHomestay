@@ -7,7 +7,6 @@ const openModelSlice = createSlice({
     }, reducers: {
         onOpen: (state, action) => {
             state.value = action.payload;
-            console.log("HAHA");
         },
         onClose: (state, action) => {
             state.value = action.payload;

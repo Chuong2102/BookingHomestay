@@ -3,19 +3,25 @@ import { Container } from 'reactstrap';
 import { NavMenu } from './navbar/NavMenu';
 import Model from './models/Model';
 import RegisterModel from './models/RegisterModel';
+import LoginModel from './models/LoginModel';
+import { useSelector, useDispatch } from "react-redux";
 
-export class Layout extends Component {
-  static displayName = Layout.name;
+const Layout = (props) => {
+  const displayName = Layout.name;
 
-  render() {
-    return (
-      <div>
-        <RegisterModel />
-        <NavMenu />
-        <Container>
-          {this.props.children}
-        </Container>
-      </div>
-    );
-  }
+  const isLogin = useSelector((state) => state.authentication.value);
+
+  return (
+    <div>
+      {isLogin && (<LoginModel/>)}
+      {!isLogin && (<RegisterModel/>)}
+      
+      <NavMenu />
+      <Container>
+        {props.children}
+      </Container>
+    </div>
+  );
 }
+
+export default Layout;
