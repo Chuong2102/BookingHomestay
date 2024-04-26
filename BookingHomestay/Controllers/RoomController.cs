@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BookingHomestay.API.Controllers
 {
-    [Route("api/v1/[controller]")]
+    [Route("api/v1/")]
     [ApiController]
     public class RoomController : ControllerBase
     {
@@ -17,11 +17,12 @@ namespace BookingHomestay.API.Controllers
         }
 
         [HttpPost]
+        [Route("Rooms")]
         public async Task<List<Room>> GetAllRooms()
         {
             return await roomService.GetAllRoomsAsync();
         }
-
+        [Route("Room")]
         [HttpGet]
         public async Task<Room> GetRoomByID(int id)
         {

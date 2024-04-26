@@ -8,10 +8,12 @@ import { useSelector, useDispatch } from "react-redux";
 import {onOpen, onClose} from '../../redux/openModelSlice';
 import Heading from '../Heading';
 import Button from "../Button";
-import { json } from "react-router-dom";
+import { json, useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify'
 
 
 const LoginModel = () => {
+    const usenavigate = useNavigate();
     const isOpen = useSelector((state) => state.openModel.value);
     const dispatch = useDispatch();
 
@@ -33,7 +35,10 @@ const LoginModel = () => {
         
         const response = await axios.post(apiUrl, data);
         console.log(response);
-        
+        toast.success("Đăng nhập thành công!");
+        usenavigate("/");
+
+
         // fetch(apiUrl, {
         //     method: 'POST',
         //     headers: {'Content-Type': 'application/json'},

@@ -11,7 +11,7 @@ const Home = () => {
 
     const [rooms, setRooms] = useState([]);
     const [page, setPage] = useState(1);
-    const apiEx = `https://localhost:7188/api/Room`;
+    const apiEx = `https://localhost:7188/api/v1/Rooms`;
     const [hasMore, setHasMore] = useState(true); // Track if there are more posts to load
 
     useEffect(() => {

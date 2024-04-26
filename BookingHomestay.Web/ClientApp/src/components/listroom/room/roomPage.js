@@ -12,7 +12,7 @@ const RoomPage = () => {
     const [room, setRoom] = useState({});
     const imgSrc = 'https://cdn.longkhanhpets.com/2019/08/tam-ly-loai-meo-1.jpg';
 
-    const apiEx = `https://localhost:7188/api/Room/?id=${id}`;
+    const apiEx = `https://localhost:7188/api/v1/Room/?id=${id}`;
     console.log(id);
 
     const initialDateRange = {
@@ -39,7 +39,7 @@ const RoomPage = () => {
 
     return(
         <Container>
-            <div className='pt-[150px] max-w-screen-lg mx-auto'>
+            <div className='pt-[250px] max-w-screen-lg mx-auto'>
                 <div className='flex flex-col gap-6'>
                     <RoomHead title = {room.title} id={room.id} imageSrc={imgSrc} userID={room.userID}/>
                     <div className='w-full'>
