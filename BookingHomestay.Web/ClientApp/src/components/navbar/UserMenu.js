@@ -5,9 +5,11 @@ import MenuItem from './MenuItem';
 import {onOpen, onClose} from '../../redux/openModelSlice';
 import {onLogin, onSignUp} from '../../redux/authenSlice';
 import { useSelector, useDispatch } from "react-redux";
+import { json, useNavigate } from "react-router-dom";
 
 const UserMenu = () => {
     const dispatch = useDispatch();
+    const usenavigate = useNavigate();
 
     const [isOpen, setIsOpen] = useState(false);
 
@@ -31,6 +33,7 @@ const UserMenu = () => {
                     <div className='flex flex-col cursor-pointer bg-white'>
                         <MenuItem onClick={() => {dispatch(onOpen(true)); dispatch(onLogin(true))}} label="Đăng nhập"/>
                         <MenuItem onClick={() => {dispatch(onOpen(true)); dispatch(onSignUp(false))}} label="Đăng ký"/>
+                        <MenuItem onClick={() => { usenavigate("/AddRoom") }} label="Thêm phòng"/>
                     </div>
                 </div>    
             )}
