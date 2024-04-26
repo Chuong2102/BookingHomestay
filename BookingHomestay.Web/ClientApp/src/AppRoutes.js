@@ -7,6 +7,7 @@ import RoomPage from "./components/listroom/room/roomPage";
 const AppRoutes = [
   {
     index: true,
+    path: '/home',
     element: <Home />
   },
   {

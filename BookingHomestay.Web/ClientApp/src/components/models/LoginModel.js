@@ -10,6 +10,7 @@ import Heading from '../Heading';
 import Button from "../Button";
 import { json, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const LoginModel = () => {
@@ -35,8 +36,12 @@ const LoginModel = () => {
         
         const response = await axios.post(apiUrl, data);
         console.log(response);
+
         toast.success("Đăng nhập thành công!");
-        usenavigate("/");
+
+        console.log("Login successfully!");
+        usenavigate("/home");
+        dispatch(onClose(false));
 
 
         // fetch(apiUrl, {
@@ -48,6 +53,7 @@ const LoginModel = () => {
 
     const bodyContent = (
         <div className="flex flex-col gap-4">
+            <ToastContainer />
             <Heading title="Đăng nhập"/>
 
             <form onSubmit={handleSubmit(onSubmit)}>
