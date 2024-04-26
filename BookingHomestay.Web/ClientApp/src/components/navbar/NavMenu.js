@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Container from '../Container';
+import {useCallback, useState} from 'react';
 import { Collapse, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import Logo from './Logo';
@@ -14,15 +15,19 @@ export class NavMenu extends Component {
     super(props);
 
     this.toggleNavbar = this.toggleNavbar.bind(this);
+
     this.state = {
-      collapsed: true
+      collapsed: true,
+      isOpenSearchBar: false
     };
   }
 
   toggleNavbar () {
-    this.setState({
-      collapsed: !this.state.collapsed
-    });
+    this.setState(
+      {
+        collapsed: !this.state.collapsed
+      }
+    );
   }
 
   render() {

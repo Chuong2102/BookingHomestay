@@ -11,6 +11,10 @@ namespace BookingHomestay.Domain.Entities.RoomAggregate
             PlaceID = placeID;
             Latitude = latitude;
             Longitude = longitude;
+
+            var gf = NetTopologySuite.NtsGeometryServices.Instance.CreateGeometryFactory(4326);
+            var point = gf.CreatePoint(new NetTopologySuite.Geometries.Coordinate(latitude, latitude));
+            this.LocationPoint = point;
         }
 
         public string? PlaceID { get; set; }

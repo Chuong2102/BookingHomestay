@@ -131,7 +131,7 @@ function Search({ onSearchItemClick }) {
                 )}
                 onClickOutside={handleHideResult}
             >
-                <div className={cx('search', 'mt-[40px]', 'mb-[60px]')}>
+                <div className={cx('search', 'mt-[5px]', 'mb-[60px]')}>
                     <input
                         ref={inputRef}
                         value={searchValue}

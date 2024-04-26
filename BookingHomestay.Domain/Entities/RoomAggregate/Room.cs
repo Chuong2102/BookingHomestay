@@ -30,6 +30,20 @@ namespace BookingHomestay.Domain.Entities.Room
             Area = area;
         }
 
+        public Room(int roomID, int userID, string description, string title, decimal price, double area, Location location)
+        {
+            Guard.IsNotNull(userID, nameof(userID));
+            Guard.IsNotNull(roomID, nameof(roomID));
+
+            ID = roomID;
+            UserID = userID;
+            Description = description;
+            Title = title;
+            Price = price;
+            Area = area;
+            this.Location = location;
+        }
+
         public Room(int roomID, int userID, string description, string title, decimal price, double area, Address address, Location location)
         {
             Guard.IsNotNull(userID, nameof(userID));

@@ -21,7 +21,7 @@ const RoomInfo = (category) => {
             container: mapContainerRef.current,
             style: 'https://tiles.goong.io/assets/goong_map_web.json',
             center: [longitude, latitude],
-            zoom: 18,
+            zoom: 15,
         });
 
         markerRef.current = new mapboxgl.Marker({

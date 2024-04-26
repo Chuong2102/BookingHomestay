@@ -53,7 +53,7 @@ const Room = () => {
             container: mapContainerRef.current,
             style: 'https://tiles.goong.io/assets/goong_map_web.json',
             center: [longitude, latitude],
-            zoom: 18,
+            zoom: 15,
         });
 
         markerRef.current = new mapboxgl.Marker({
@@ -239,7 +239,7 @@ const Room = () => {
     };
 
     return (
-        <div className={cx('wrapper','pt-[150px]')}>
+        <div className={cx('wrapper','pt-[250px]')}>
             <div className={cx('flex', 'justify-center')}>
                 <Search onSearchItemClick={handleSearchItemClick} />
             </div>

@@ -28,14 +28,17 @@ const LoginModel = () => {
     // Get JWT Token
     // Call API
 
-    const onSubmit = (data) => {
+    const onSubmit = async (data) => {
         console.log(data);
         
-        fetch(apiUrl, {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(data)
-        }).then((res) => {console.log(res)}).then((data) => {console.log(data)}).catch(errors => console.error(errors));
+        const response = await axios.post(apiUrl, data);
+        console.log(response);
+        
+        // fetch(apiUrl, {
+        //     method: 'POST',
+        //     headers: {'Content-Type': 'application/json'},
+        //     body: JSON.stringify(data)
+        // }).then((res) => {console.log(res)}).then((data) => {console.log(data)}).catch(errors => console.error(errors));
     };
 
     const bodyContent = (
