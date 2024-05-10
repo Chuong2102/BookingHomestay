@@ -11,6 +11,8 @@ import Button from "../Button";
 import { json, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
+import { GoogleLogin } from '@react-oauth/google';
+import { googleLogout, useGoogleLogin } from '@react-oauth/google';
 
 
 const LoginModel = () => {
@@ -19,6 +21,8 @@ const LoginModel = () => {
     const dispatch = useDispatch();
 
     const [isLoading, setIsLoading] = useState(false);
+    const [ user, setUser ] = useState([]);
+    const [ profile, setProfile ] = useState([]);
 
     const {
         register,
@@ -26,7 +30,93 @@ const LoginModel = () => {
         formState: { errors },
     } = useForm();
 
-    const apiUrl = "https://localhost:7188/api/v1/Authentication/Login";
+    const handleReloadPage = () => {
+        window.location.reload();
+    }
+
+    const googleResponse = (response) => {
+        console.log(response);
+        const tokenBlob = new Blob([JSON.stringify({ credential: response.credential }, null, 2)], { type: 'application/json' });
+        const options = {
+          method: 'POST',
+          body: tokenBlob,
+          mode: 'cors',
+          cache: 'default'
+        };
+        fetch("https://localhost:7188/api/v1/google", options)
+          .then(r => {
+            r.json().then(user => {
+                // Get token
+                const token = user.token;
+
+                // Save the jwt token
+                localStorage.setItem("jwtToken", token);
+                // Open message dialog
+                toast.success("Đăng nhập thành công!");
+                // Navigate to Home
+                usenavigate("/home");
+                // Close the model
+                dispatch(onClose(false));
+
+                console.log(token);
+
+                handleReloadPage();
+            });
+          })
+      };
+
+    const login = useGoogleLogin({
+        onSuccess: (codeResponse) => {
+            console.log("Start login by Google");
+            console.log(codeResponse);
+            setUser(codeResponse); 
+            localStorage.setItem("jwtToken", user.access_token);
+
+            // Request to server
+            const tokenBlob = new Blob([JSON.stringify({ access_token: user.access_token }, null, 2)], { type: 'application/json' });
+            const options = {
+                method: 'POST',
+                body: tokenBlob,
+                mode: 'cors',
+                cache: 'default'
+            };
+
+            fetch("https://localhost:7188/api/v1/google", options)
+                .then(res => res.json()).then(json => {
+                    
+
+                    console.log(json)
+                });
+            
+            //const access_token = localStorage.getItem('jwtToken');
+            
+            // axios.post("https://localhost:7188/api/v1/google", JSON.stringify(access_token))
+            //     .then((res) => {console.log(res)})
+            //     .catch((error) => {console.log(error)});
+
+        },
+        onError: (error) => console.log('Login Failed:', error)
+    });
+
+    useEffect(
+        () => {
+            if (user) {
+                
+            }
+        },
+        [user]
+    );
+
+    // log out function to log the user out of google and set the profile array to null
+    const logOut = () => {
+        googleLogout();
+        setProfile(null);
+    };
+
+
+    
+
+    const apiUrl = "https://localhost:7188/api/v1/Login";
 
     // Get JWT Token
     // Call API
@@ -34,26 +124,30 @@ const LoginModel = () => {
     const onSubmit = async (data) => {
         console.log(data);
         
-        const response = await axios.post(apiUrl, data);
-        console.log(response);
+        // LOGIN API
+        await axios.post(apiUrl, data)
+        .then((response) => {
+            localStorage.setItem("jwtToken", response.data.token);
+            localStorage.setItem("username", response.data.email);
 
-        toast.success("Đăng nhập thành công!");
+            //axios.defaults.headers.common = {'Authorization': `bearer ${response.data.token}`}
 
-        console.log("Login successfully!");
-        usenavigate("/home");
-        dispatch(onClose(false));
+            // Close the model
+            toast.success("Đăng nhập thành công!");
 
+            console.log("Login successfully!");
+            console.log(response.data.token);
+            usenavigate("/home");
+            dispatch(onClose(false));
+            
+        }).catch((err) => { console.log(err); toast.error("Đăng nhập thất bại"); });
 
-        // fetch(apiUrl, {
-        //     method: 'POST',
-        //     headers: {'Content-Type': 'application/json'},
-        //     body: JSON.stringify(data)
-        // }).then((res) => {console.log(res)}).then((data) => {console.log(data)}).catch(errors => console.error(errors));
+       
     };
 
     const bodyContent = (
         <div className="flex flex-col gap-4">
-            <ToastContainer />
+            
             <Heading title="Đăng nhập"/>
 
             <form onSubmit={handleSubmit(onSubmit)}>
@@ -86,7 +180,9 @@ const LoginModel = () => {
         <div className="flex flex-col gap-4 mt-3 w-full p-4">
             <hr/>
             <button className=" bg-neutral-500 w-full p-2 rounded-md font-medium text-white" type="submit">Quên mật khẩu</button>
+            <GoogleLogin buttonText="Đăng nhập với Google" onSuccess={googleResponse} onError={googleResponse}></GoogleLogin>
         </div>
+        
     );
 
     

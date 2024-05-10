@@ -5,40 +5,34 @@ import {useCallback} from 'react';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-feather';
-import { NavLink } from "react-router-dom";
+import { NavLink, json } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
 
 const Home = () => {
 
     const [rooms, setRooms] = useState([]);
     const [page, setPage] = useState(1);
-    const apiEx = `https://localhost:7188/api/v1/Rooms`;
+    const apiEx = ` https://localhost:7188/api/v1/Rooms`;
     const [hasMore, setHasMore] = useState(true); // Track if there are more posts to load
 
     useEffect(() => {
-        const fetchRooms = async () => {
-            try {
-                const response = await axios.post(apiEx);
-                const data = response.data;
+        const token = localStorage.getItem("jwtToken");
 
-                console.log(data);
-                
-                // Update posts state with new data
-                setRooms(data);
+        console.log("Start call Rooms API");
+        console.log("JWTtoken: ");
+        console.log(token);
 
-                // Check if there are more posts to load
-                if (data.length === 0) {
-                    setHasMore(false);
-                }
-            } catch (error) {
-                console.error('Error fetching rooms:', error);
-            }
-        };
+        fetch(apiEx, {
+            method: "POST",
+            headers: {"Authorization": `Bearer ${token}`},
+        }).then(res => res.json()).then(json => setRooms(json));
 
-        fetchRooms();
     }, []);
 
     return (
         <Container>
+            <ToastContainer />
             <div className=' pt-[200px] grid gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-5 '>
                 {
                     rooms.map(

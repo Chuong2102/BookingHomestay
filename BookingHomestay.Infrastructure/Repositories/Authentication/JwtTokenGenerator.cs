@@ -27,7 +27,8 @@ namespace BookingHomestay.Infrastructure.Repositories.Authentication
                 new Claim(JwtRegisteredClaimNames.Sub, UserID.ToString()),
                 new Claim(JwtRegisteredClaimNames.GivenName, email),
                 new Claim(JwtRegisteredClaimNames.FamilyName, fullName),
-                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                new Claim(JwtRegisteredClaimNames.Iat, DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString())
             };
 
             var token = new JwtSecurityToken(
