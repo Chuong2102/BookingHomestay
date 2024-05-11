@@ -1,4 +1,5 @@
 ﻿using BookingHomestay.Domain.Entities.Room;
+using BookingHomestay.Domain.Entities.RoomAggregate;
 using BookingHomestay.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,5 +14,9 @@ namespace BookingHomestay.Infrastructure.Repositories
             this.dbcontext = context;
         }
 
+        public async Task<List<Category>> GetAllCategories()
+        {
+            return await dbcontext.Categories.ToListAsync();
+        }
     }
 }

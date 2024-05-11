@@ -2,7 +2,9 @@ import {TbBeach} from 'react-icons/tb';
 import {GiWindmill} from 'react-icons/wi';
 import CategoryBox from '../CategoryBox';
 import Container from '../Container';
-import { useParams } from 'react-router-dom';
+import { useParams, useSearchParams } from 'react-router-dom';
+import { useCallback } from 'react';
+import qs from 'query-string';
 
 
 const categories = [
@@ -55,16 +57,15 @@ const categories = [
 
 
 const Categories = () => {
-    const param = useParams();
-
-
+    const params = useSearchParams();
+    
     return(
         <Container>
             <div className=" flex flex-row items-center justify-between overflow-x-auto">
                 {
                     categories.map((item) => (
                         <CategoryBox key={item.label} label={item.label}
-                         description={item.description} icon={item.icon} selected={item.label}></CategoryBox>
+                         description={item.description} icon={item.icon}></CategoryBox>
                     ))
                 }
                 

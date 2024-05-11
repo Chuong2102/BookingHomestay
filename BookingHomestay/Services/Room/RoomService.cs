@@ -1,5 +1,6 @@
 ﻿using BookingHomestay.API.DTOs;
 using BookingHomestay.Domain.Entities.Room;
+using BookingHomestay.Domain.Entities.RoomAggregate;
 using BookingHomestay.Domain.Entities.UserAggregate;
 using BookingHomestay.Domain.Interfaces;
 using BookingHomestay.Infrastructure.Repositories;
@@ -73,6 +74,11 @@ namespace BookingHomestay.API.Services.Room
                 result = 0;
             }
             return result;
+        }
+
+        public Task<List<Category>> GetAllCategoriesAsync()
+        {
+            return roomRepository.GetAllCategories();
         }
     }
 }

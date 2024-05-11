@@ -1,5 +1,6 @@
 ﻿using BookingHomestay.API.Services.Room;
 using BookingHomestay.Domain.Entities.Room;
+using BookingHomestay.Domain.Entities.RoomAggregate;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -31,6 +32,14 @@ namespace BookingHomestay.API.Controllers
         public async Task<Room> GetRoomByID(int id)
         {
             return await roomService.GetRoomAsync(id);
+        }
+
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("AllCategories")]
+        public async Task<List<Category>> GetCategoriesAsync()
+        {
+            return await roomService.GetAllCategoriesAsync();
         }
     }
 }
