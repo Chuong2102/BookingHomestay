@@ -47,7 +47,8 @@ namespace BookingHomestay.Infrastructure.Repositories
 
         public Task<T> UpdateAsync(T entity)
         {
-            throw new NotImplementedException();
+            dbContext.Update(entity);
+            return Task.FromResult(entity);
         }
 
        

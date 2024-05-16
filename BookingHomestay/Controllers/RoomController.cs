@@ -1,4 +1,5 @@
-﻿using BookingHomestay.API.Services.Room;
+﻿using BookingHomestay.API.DTOs;
+using BookingHomestay.API.Services.Room;
 using BookingHomestay.Domain.Entities.Room;
 using BookingHomestay.Domain.Entities.RoomAggregate;
 using Microsoft.AspNetCore.Authorization;
@@ -24,6 +25,14 @@ namespace BookingHomestay.API.Controllers
         public async Task<List<Room>> GetAllRooms()
         {
             return await roomService.GetAllRoomsAsync();
+        }
+
+        [Authorize]
+        [HttpPost]
+        [Route("SearchRooms")]
+        public async Task<List<Room>> SearchRooms([FromBody] RoomSearchDTO payload)
+        {
+            return await roomService.GetAllRoomsAsync(payload);
         }
 
         [Authorize]

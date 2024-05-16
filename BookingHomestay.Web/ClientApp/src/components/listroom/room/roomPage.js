@@ -6,6 +6,7 @@ import axios from 'axios';
 import TitlebarBelowMasonryImageList from '../../images/listImages';
 import RoomInfo from './roomInfo';
 import RoomReservation from './RoomServation';
+import Comment from '../../Comment';
 
 const RoomPage = () => {
     const { id } = useParams();
@@ -24,11 +25,12 @@ const RoomPage = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(apiEx);
+                const token = localStorage.getItem("jwtToken");
 
-                setRoom(response.data);
-
-                console.log(response.data);
+                const response = fetch(apiEx, {
+                    method: "GET",
+                    headers: {"Authorization": `Bearer ${token}`},
+                }).then(res => res.json()).then((json) => {setRoom(json)});
             } catch (e) {
                 console.error('Error fetching data:', e);
             }
@@ -40,7 +42,8 @@ const RoomPage = () => {
     return(
         <Container>
             <div className='pt-[250px] max-w-screen-lg mx-auto'>
-                <div className='flex flex-col gap-6'>
+                <div className='flex flex-col gap-6 pb-2'>
+
                     <RoomHead title = {room.title} id={room.id} imageSrc={imgSrc} userID={room.userID}/>
                     <div className='w-full'>
                         <TitlebarBelowMasonryImageList className="w-full"/>
@@ -50,6 +53,18 @@ const RoomPage = () => {
                         <div className='mb-10 md:order-last md:col-span-3'>
                             <RoomReservation price={room.price} />
                         </div>
+                    </div>
+                </div>
+                <hr/>
+                <div className='grid grid-cols-2 pt-2'>
+                    <div className='flex flex-col gap-3 pr-5'>
+                        <Comment/>
+                    </div>
+                    <div className='flex flex-col gap-3 pr-5'>
+                        <Comment/>
+                    </div>
+                    <div className='flex flex-col gap-3 pr-5'>
+                        <Comment/>
                     </div>
                 </div>
             </div>

@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import mapboxgl from '@goongmaps/goong-js';
 import '@goongmaps/goong-js/dist/goong-js.css';
 import styles from '../../addpost/Room.module.scss';
+import Comment from '../../Comment';
 
 const cx = classNames.bind(styles);
 
@@ -79,11 +80,15 @@ const RoomInfo = (category) => {
             )}
             <hr/>
             <div className='text-lg font-light text-neutral-500'>
-                My description
+            Cabin hai phòng ngủ mới được xây dựng là một công trình kiến trúc hiện đại giữa thế kỷ.
+             Nằm trên đỉnh đồi, chỗ ở có tầm nhìn bao quát 360 độ về Núi Batulao hoàng hôn tuyệt đẹp, làm dịu Vịnh Balayan và các vùng đất nông nghiệp tươi đẹp của Nasugbu.
+             Địa hình và độ cao độc đáo của nó cho phép khách ôm theo gió núi trong lành và thời tiết mát mẻ thực tế quanh năm. 
+             Bằng cách kết hợp vẻ đẹp thô sơ của vùng nông thôn và sự thoải mái của khách sạn boutique, cabin mang đến trải nghiệm R & R được xác định lại.
             </div>
             {/* Map ---*/}
             <div ref={mapContainerRef} className={cx('map__container', 'shadow-md')} />
             {/* --- */}
+            
         </div>
     );
 }

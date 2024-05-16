@@ -7,6 +7,7 @@ import mapboxgl from '@goongmaps/goong-js';
 import '@goongmaps/goong-js/dist/goong-js.css';
 import styles from '../addpost/Room.module.scss';
 import axios from 'axios';
+import Counter from '../inputs/Counter';
 
 const goongApi_Rob = 'oC8CNdh20xrH8Dpm0SIkZYQqBijW847QWVmBE0DB';
 mapboxgl.accessToken = 'wnicbAmnNkoMHNYUKWnlFHezV189FjmMwkNJ7hKW';
@@ -31,6 +32,7 @@ const Search = () => {
   const [latitude, setLatitude] = useState(16.462325713021514); 
   const [longitude, setLongitude] = useState(107.61745585099027);
   const [placeId, setPlaceId] = useState('');
+  const [count, setCount] = useState(1);
 
   useEffect(() => {
     console.log("load the map");
@@ -103,6 +105,10 @@ const Search = () => {
       setLongitude(lngLat.lng);
     }
 
+    const onCount = (value) => {
+      setCount(value);
+    }
+
   useEffect(() => {
       if (markerRef.current) {
         console.log("Fly to");
@@ -139,6 +145,7 @@ const Search = () => {
 
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenCalender, setIsOpenCal] = useState(false);
+  const [isOpenCounter, setIsCounter] = useState(false);
 
   const toggleOpen = useCallback(
       () => {
@@ -158,6 +165,10 @@ const Search = () => {
       setIsOpenCal((value) => !value);
     }, []
   );
+
+  const toggleOpenCounter = useCallback(() => {
+    setIsCounter((value) => !value);
+  },[]);
 
   return ( 
       <div
@@ -245,7 +256,13 @@ const Search = () => {
               h-full
             "
           >
-            <div className="hidden sm:block">Khách</div>
+            {isOpenCounter && (
+              <div className=' absolute bg-white rounded-xl w-full top-20 left-0 right-0 max-w-[450px] md:w-auto shadow-sm mx-auto text-center overflow-hidden text-sm'>
+                  <Counter title="Khách" subtitle="Số người 1 phòng" value={count} onChange={(value) => {onCount(value);}}/>
+              </div>    
+            )}  
+
+            <div onClick={toggleOpenCounter} className="hidden sm:block">Khách</div>
             <div className="p-2 bg-rose-500 rounded-full text-white">
               <BiSearch size={18}/>
             </div>

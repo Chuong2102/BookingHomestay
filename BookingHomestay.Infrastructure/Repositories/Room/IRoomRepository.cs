@@ -7,5 +7,7 @@ namespace BookingHomestay.Infrastructure.Repositories
     public interface IRoomRepository : IAsyncRepository<BookingHomestay.Domain.Entities.Room.Room>
     {
         Task<List<Category>> GetAllCategories();
+        Task<Category> GetCategoryByName(string name);
+        Task<List<Room>> GetAllRoomsByCategoryName(string categoryName);
     }
 }

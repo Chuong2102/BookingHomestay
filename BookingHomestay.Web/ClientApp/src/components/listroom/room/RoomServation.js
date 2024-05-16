@@ -1,6 +1,6 @@
 import * as React from 'react';
-import Calender from '../../Calender/Calender';
 import Button from '../../Button';
+import Calender from '../../Calender/Calender';
 
 const RoomReservation = (price) => {
     return(

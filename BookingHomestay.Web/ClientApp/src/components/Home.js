@@ -8,27 +8,44 @@ import { Link } from 'react-feather';
 import { NavLink, json } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
+import { useParams, useSearchParams } from 'react-router-dom';
+import getRooms from '../app/actions/getRooms';
+import { useSelector, useDispatch } from "react-redux";
+import { onGet, onStopGet } from '../redux/getRoomsSlice';
 
 const Home = () => {
 
     const [rooms, setRooms] = useState([]);
     const [page, setPage] = useState(1);
-    const apiEx = ` https://localhost:7188/api/v1/Rooms`;
+    const apiEx = `https://localhost:7188/api/v1/SearchRooms`;
     const [hasMore, setHasMore] = useState(true); // Track if there are more posts to load
+    const [searchParams, setSearchParams] = useSearchParams();
+    const [category, setCategory] = useState('');
+    
+    const isGetRoom= useSelector((state) => state.getRooms.value);
+    const dispatch = useDispatch();
+
+    const getListRooms = async () => {
+        const category = searchParams.get('category');
+        setCategory(category);
+
+        console.log("NGU");
+        console.log(category);
+
+        const r = await getRooms(category);
+        setRooms(r);
+    }
 
     useEffect(() => {
-        const token = localStorage.getItem("jwtToken");
+        getListRooms();
+    }, [category]);
 
-        console.log("Start call Rooms API");
-        console.log("JWTtoken: ");
-        console.log(token);
+    if(isGetRoom){
+        dispatch(onStopGet(false));
+        getListRooms();
+    }
 
-        fetch(apiEx, {
-            method: "POST",
-            headers: {"Authorization": `Bearer ${token}`},
-        }).then(res => res.json()).then(json => setRooms(json));
-
-    }, []);
+    //console.log(rooms);
 
     return (
         <Container>

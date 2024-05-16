@@ -80,5 +80,17 @@ namespace BookingHomestay.API.Services.Room
         {
             return roomRepository.GetAllCategories();
         }
+
+        public async Task<List<Domain.Entities.Room.Room>> GetAllRoomsAsync(RoomSearchDTO payload)
+        {
+            if (payload.Longitude == 0 && payload.Latitude == 0 & payload.CategoryName == "")
+                return await roomRepository.GetAllAsync();
+
+            var category = await roomRepository.GetCategoryByName(payload.CategoryName);
+
+            var rooms = await roomRepository.GetAllAsync(r => r.Categories.Contains(category));
+
+            return rooms;
+        }
     }
 }
