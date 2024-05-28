@@ -9,6 +9,7 @@ import styles from '../addpost/Room.module.scss';
 import axios from 'axios';
 import Counter from '../inputs/Counter';
 
+
 const goongApi_Rob = 'oC8CNdh20xrH8Dpm0SIkZYQqBijW847QWVmBE0DB';
 mapboxgl.accessToken = 'wnicbAmnNkoMHNYUKWnlFHezV189FjmMwkNJ7hKW';
 
@@ -46,8 +47,6 @@ const Search = () => {
       console.log("can not get id");
       return;
     }
-
-    console.log("Hichic");
 
     mapRef.current = new mapboxgl.Map({
       container: document.getElementById("map"),

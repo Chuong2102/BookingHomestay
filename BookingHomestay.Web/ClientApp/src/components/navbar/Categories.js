@@ -12,7 +12,7 @@ import qs from 'query-string';
 import { icon } from '@fortawesome/fontawesome-svg-core';
 
 
-const categories = [
+export const categories = [
     {
         label: 'Biển',
         icon: TbBeach,

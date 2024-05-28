@@ -106,12 +106,10 @@ function UploadImage({ onImagesChange, showDropzone = true, images = [] }) {
                     <p>Drag 'n' drop some files here, or click to select files</p>
                 </div>
             )}
-            <aside className="flex flex-row flex-wrap mt-10">{thumbs}</aside>
-            <div className={cx('add-image', 'mt-[8px]')}>
+            <aside className="flex flex-row flex-wrap mt-2">{thumbs}</aside>
+            <div className={cx('add-image')}>
                 <label htmlFor="add-images">
-                    <Button className={cx('bg-gray-400', 'hover:opacity-80', 'text-white')} onClick={handleButtonClick}>
-                        Thêm ảnh
-                    </Button>
+                <button className=" bg-black p-2 rounded-md font-md text-white" type="submit" onClick={handleButtonClick}>Thêm ảnh</button>
 
                     <input
                         ref={inputRef}

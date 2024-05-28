@@ -29,11 +29,14 @@ const UserMenu = () => {
                 </div>
             </div>
             {isOpen && (
-                <div className=' absolute rounded-xl shadow-sm w-36 top-14 right-0 overflow-hidden text-sm'>
+                <div className=' absolute rounded-xl shadow-sm w-60 top-18 right-0 overflow-hidden text-sm'>
                     <div className='flex flex-col cursor-pointer bg-white'>
                         <MenuItem onClick={() => {dispatch(onOpen(true)); dispatch(onLogin(true))}} label="Đăng nhập"/>
                         <MenuItem onClick={() => {dispatch(onOpen(true)); dispatch(onSignUp(false))}} label="Đăng ký"/>
                         <MenuItem onClick={() => { usenavigate("/AddRoom") }} label="Thêm phòng"/>
+                        <MenuItem onClick={() => { usenavigate("/profile")}} label="Tài khoản cá nhân"/>
+                        <MenuItem onClick={() => { usenavigate("/trips")}} label="Chuyến đi"/>
+                        <MenuItem onClick={() => { usenavigate("/host")}} label="Quản lý homestay"/>
                     </div>
                 </div>    
             )}

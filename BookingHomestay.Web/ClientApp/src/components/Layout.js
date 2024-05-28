@@ -15,11 +15,8 @@ const Layout = (props) => {
     <div>
       {isLogin && (<LoginModel/>)}
       {!isLogin && (<RegisterModel/>)}
-      
-      <NavMenu />
-      <Container>
-        {props.children}
-      </Container>
+
+      {props.children}
     </div>
   );
 }

@@ -7,6 +7,7 @@ import Logo from './Logo';
 import Search from './Search';
 import UserMenu from './UserMenu';
 import Categories from './Categories';
+import Host from './Host';
 
 export class NavMenu extends Component {
   static displayName = NavMenu.name;
@@ -38,12 +39,11 @@ export class NavMenu extends Component {
           <Container>
             <div className='flex flex-row items-center justify-between gap-3 md:gap-0'>
               <Logo/>
-              <Search/>
+              <Host/>
               <UserMenu/>
             </div>
           </Container>
         </div>
-        <Categories/>
       </div>
     );
   }

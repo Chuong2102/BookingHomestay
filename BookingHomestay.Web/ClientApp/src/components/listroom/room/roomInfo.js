@@ -1,14 +1,19 @@
 import classNames from 'classnames/bind';
 import RoomCategory from './roomCategory';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import mapboxgl from '@goongmaps/goong-js';
 import '@goongmaps/goong-js/dist/goong-js.css';
 import styles from '../../addpost/Room.module.scss';
 import Comment from '../../Comment';
+import { useSelector, useDispatch } from "react-redux";
+import { onGet, onStopGet } from '../../../redux/getLocationSlice';
 
 const cx = classNames.bind(styles);
 
-const RoomInfo = (category) => {
+const RoomInfo = (room) => {
+    const isGetLocation= useSelector((state) => state.getLocation.value);
+    const dispatch = useDispatch();
+
     // Map (begin)
     const mapContainerRef = useRef(null);
     const mapRef = useRef(null);
@@ -18,6 +23,7 @@ const RoomInfo = (category) => {
     const [longitude, setLongitude] = useState(107.61745585099027);
 
     useEffect(() => {
+        
         mapRef.current = new mapboxgl.Map({
             container: mapContainerRef.current,
             style: 'https://tiles.goong.io/assets/goong_map_web.json',
@@ -32,6 +38,12 @@ const RoomInfo = (category) => {
             .addTo(mapRef.current);
 
         markerRef.current.on('dragend', onDragEnd);
+
+        if(room.location){
+            console.log("is setting location in useEffect");
+            setLatitude(room.location.latitude);
+            setLongitude(room.location.longitude);
+        }
 
         return () => {
             mapRef.current.remove();
@@ -49,8 +61,36 @@ const RoomInfo = (category) => {
             markerRef.current.setLngLat([longitude, latitude]);
             mapRef.current.flyTo({ center: [longitude, latitude] });
         }
+
     }, [latitude, longitude]);
+
+    useEffect(() => {
+        if(room.location){
+            setLatitude(room.location.latitude);
+            setLongitude(room.location.longitude);
+        }
+    },[room.location]);
+
     // Map (end)
+
+    const handleGetLocation = useCallback(() => {
+        dispatch(onStopGet(false));
+
+        setLatitude(room.location.latitude);
+        setLongitude(room.location.longitude);
+    });
+
+    //
+    // if(isGetLocation){
+    //     dispatch(onStopGet(false));
+
+    //     console.log(room.location);
+    //     setLatitude(room.location.latitude);
+    //     setLongitude(room.location.longitude);
+
+    //     markerRef.current.setLngLat([longitude, latitude]);
+    //     mapRef.current.flyTo({ center: [longitude, latitude] });
+    // }
 
     return(
         <div className=" col-span-4 flex flex-col gap-8">
@@ -75,11 +115,13 @@ const RoomInfo = (category) => {
 
             </div>
             <hr/>
-            {category & (
-                <RoomCategory label={category.label} icon={category.icon} description={category.description}/>
-            )}
+            {
+                // room.category & (
+                //     <RoomCategory label={room.category.label} icon={room.category.icon} description={room.category.description}/>
+                // )
+            }
             <hr/>
-            <div className='text-lg font-light text-neutral-500'>
+            <div className='text-lg font-light text-neutral-800'>
             Cabin hai phòng ngủ mới được xây dựng là một công trình kiến trúc hiện đại giữa thế kỷ.
              Nằm trên đỉnh đồi, chỗ ở có tầm nhìn bao quát 360 độ về Núi Batulao hoàng hôn tuyệt đẹp, làm dịu Vịnh Balayan và các vùng đất nông nghiệp tươi đẹp của Nasugbu.
              Địa hình và độ cao độc đáo của nó cho phép khách ôm theo gió núi trong lành và thời tiết mát mẻ thực tế quanh năm. 

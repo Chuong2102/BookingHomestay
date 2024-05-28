@@ -21,7 +21,6 @@ namespace BookingHomestay.Infrastructure.Repositories
 
         public async Task<List<Room>> GetAllRoomsByCategoryName(string categoryName)
         {
-            var cate = dbcontext.Categories.Where(c => c.Name == categoryName).FirstOrDefault();
             return await dbcontext.Categories.Where(c => c.Name == categoryName).SelectMany(r => r.Rooms).ToListAsync();
         }
 
@@ -30,6 +29,14 @@ namespace BookingHomestay.Infrastructure.Repositories
             var category = await dbcontext.Categories.FirstOrDefaultAsync(c => c.Name == name);
 
             return category;
+        }
+
+        public async Task<List<Comment>> GetCommentByRoomID(int roomID)
+        {
+            var room = await dbcontext.Rooms.FirstOrDefaultAsync(r => r.ID == roomID);
+            var comments = await dbcontext.Comments.Where(c => c.Room.Equals(room)).ToListAsync();
+
+            return comments;
         }
     }
 }

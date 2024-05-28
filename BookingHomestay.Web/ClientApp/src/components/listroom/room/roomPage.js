@@ -7,19 +7,27 @@ import TitlebarBelowMasonryImageList from '../../images/listImages';
 import RoomInfo from './roomInfo';
 import RoomReservation from './RoomServation';
 import Comment from '../../Comment';
+import { useSelector, useDispatch } from "react-redux";
+import { onGet, onStopGet } from '../../../redux/getLocationSlice';
 
 const RoomPage = () => {
+    // redux GET LCOATION
+    const isGetLocation= useSelector((state) => state.getLocation.value);
+    const dispatch = useDispatch();
+
     const { id } = useParams();
     const [room, setRoom] = useState({});
+    const [comment, setComment] = useState([]);
+    
     const imgSrc = 'https://cdn.longkhanhpets.com/2019/08/tam-ly-loai-meo-1.jpg';
 
     const apiEx = `https://localhost:7188/api/v1/Room/?id=${id}`;
-    console.log(id);
+    const getCommentAPI = `https://localhost:7188/api/v1/AllCommentsByRoom?id=${id}`;
 
     const initialDateRange = {
         startDate: new Date(),
         endDate: new Date(),
-        key: 'selection'
+        key: 'selection'    
     };
 
     useEffect(() => {
@@ -30,7 +38,14 @@ const RoomPage = () => {
                 const response = fetch(apiEx, {
                     method: "GET",
                     headers: {"Authorization": `Bearer ${token}`},
-                }).then(res => res.json()).then((json) => {setRoom(json)});
+                }).then(res => res.json()).then((json) => {setRoom(json); console.log(json); dispatch(onGet(true))});
+
+                fetch(getCommentAPI, {
+                    method: "GET",
+                    headers: {"Authorization": `Bearer ${token}`},
+                }).then(res => res.json()).then((json) => {setComment(json); });
+
+
             } catch (e) {
                 console.error('Error fetching data:', e);
             }
@@ -49,7 +64,9 @@ const RoomPage = () => {
                         <TitlebarBelowMasonryImageList className="w-full"/>
                     </div>
                     <div className='grid grid-cols-1 md:grid-cols-7 md:gap-10 mt-6'>
-                        <RoomInfo category={room.category}/>
+                        {isGetLocation && (
+                            <RoomInfo category={room.category} location={room.location}/>
+                        )}
                         <div className='mb-10 md:order-last md:col-span-3'>
                             <RoomReservation price={room.price} />
                         </div>
@@ -57,15 +74,15 @@ const RoomPage = () => {
                 </div>
                 <hr/>
                 <div className='grid grid-cols-2 pt-2'>
-                    <div className='flex flex-col gap-3 pr-5'>
-                        <Comment/>
-                    </div>
-                    <div className='flex flex-col gap-3 pr-5'>
-                        <Comment/>
-                    </div>
-                    <div className='flex flex-col gap-3 pr-5'>
-                        <Comment/>
-                    </div>
+                    {
+                        comment.map(
+                            (cmt, index) => (
+                                <div className='flex flex-col gap-3 pr-5'>
+                                    <Comment cmt={cmt}/>
+                                </div>
+                            )
+                        )
+                    }
                 </div>
             </div>
         </Container>

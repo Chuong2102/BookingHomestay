@@ -9,5 +9,6 @@ namespace BookingHomestay.Infrastructure.Repositories
         Task<List<Category>> GetAllCategories();
         Task<Category> GetCategoryByName(string name);
         Task<List<Room>> GetAllRoomsByCategoryName(string categoryName);
+        Task<List<Comment>> GetCommentByRoomID(int roomID);
     }
 }

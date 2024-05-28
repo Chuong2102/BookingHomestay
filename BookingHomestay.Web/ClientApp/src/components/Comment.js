@@ -1,7 +1,7 @@
 import Avatar from './navbar/Avatar';
 import { FaStar } from "react-icons/fa";
 
-const Comment = () => {
+const Comment = ({cmt}) => {
     return(
         <div className="flex flex-col gap-2 py-2">
             <div className='flex flex-row items-center'>
@@ -27,12 +27,7 @@ const Comment = () => {
                 </div>
             </div>
             <div>
-            Khung cảnh tuyệt vời, trang trí tuyệt vời, nhân viên thân thiện, 
-            điều duy nhất còn thiếu là nước tắm rất nhỏ, nước nóng không ổn định, 
-            gần như được rửa sạch trong nước lạnh. <br/> 
-                <div className=' font-bold'>
-                    Yêu Chương nhìu nhắm chụt chụt :3
-                </div>
+                {cmt.commentText}
             </div>
         </div>
     );

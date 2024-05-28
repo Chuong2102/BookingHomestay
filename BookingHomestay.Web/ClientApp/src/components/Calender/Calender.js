@@ -1,10 +1,10 @@
 import 'react-date-range/dist/styles.css'; // main css file
 import 'react-date-range/dist/theme/default.css'; // theme css file
-import { DateRange } from 'react-date-range';
+import { DateRange, Range, RangeKeyDict } from 'react-date-range';
 
-import {useState} from 'react'
+import {useState} from 'react';
 
-const Calender = () => {
+const Calender = ({value, onChange, disableDates}) => {
     const [state, setState] = useState([
         {
           startDate: new Date(),
@@ -19,6 +19,7 @@ const Calender = () => {
             onChange={item => setState([item.selection])}
             moveRangeOnFirstSelection={false}
             ranges={state}
+            rangeColors={['#f33e5b', '#3ecf8e', '#fed14c']}
         />
     );
 }

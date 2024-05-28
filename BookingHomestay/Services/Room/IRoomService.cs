@@ -12,5 +12,6 @@ namespace BookingHomestay.API.Services.Room
         Task<Domain.Entities.Room.Room> GetRoomAsync(int id);
         Task<List<BookingHomestay.Domain.Entities.Room.Room>> GetAllRoomsByLocationAsync(RoomSearchDTO roomSearchDTO);
         Task<List<Category>> GetAllCategoriesAsync();
+        Task<List<Comment>> GetAllCommentByRoom(int roomID);
     }
 }

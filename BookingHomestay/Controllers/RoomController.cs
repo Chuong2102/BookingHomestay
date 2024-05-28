@@ -50,5 +50,20 @@ namespace BookingHomestay.API.Controllers
         {
             return await roomService.GetAllCategoriesAsync();
         }
+
+        [AllowAnonymous]
+        [HttpPost]
+        [Route("AllCommentsByRoom")]
+        public async Task<List<Comment>> GetCommentsByRoomAsync([FromBody] CommentGetByRoomDTO payload)
+        {
+            return await roomService.GetAllCommentByRoom(payload.RoomID);
+        }
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("AllCommentsByRoom")]
+        public async Task<List<Comment>> GetCommentsByRoomAsync(int id)
+        {
+            return await roomService.GetAllCommentByRoom(id);
+        }
     }
 }

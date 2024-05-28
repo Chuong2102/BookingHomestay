@@ -92,5 +92,10 @@ namespace BookingHomestay.API.Services.Room
 
             return rooms;
         }
+
+        public Task<List<Comment>> GetAllCommentByRoom(int roomID)
+        {
+            return roomRepository.GetCommentByRoomID(roomID);
+        }
     }
 }

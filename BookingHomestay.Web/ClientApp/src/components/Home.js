@@ -12,6 +12,7 @@ import { useParams, useSearchParams } from 'react-router-dom';
 import getRooms from '../app/actions/getRooms';
 import { useSelector, useDispatch } from "react-redux";
 import { onGet, onStopGet } from '../redux/getRoomsSlice';
+import NavMenu from './navbar/NavMenu';
 
 const Home = () => {
 
@@ -28,8 +29,7 @@ const Home = () => {
     const getListRooms = async () => {
         const category = searchParams.get('category');
         setCategory(category);
-
-        console.log("NGU");
+        
         console.log(category);
 
         const r = await getRooms(category);
@@ -48,20 +48,23 @@ const Home = () => {
     //console.log(rooms);
 
     return (
-        <Container>
-            <ToastContainer />
-            <div className=' pt-[200px] grid gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-5 '>
-                {
-                    rooms.map(
-                        (room, index) => (
-                            <NavLink to={`/detail/${room.id}`} key={index}>
-                                <RoomCard key={index} Room={room}/>
-                            </NavLink>
+        <div>
+            <NavMenu/>
+            <Container>
+                <ToastContainer />
+                <div className=' pt-[200px] grid gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-5 '>
+                    {
+                        rooms.map(
+                            (room, index) => (
+                                <NavLink to={`/detail/${room.id}`} key={index}>
+                                    <RoomCard key={index} Room={room}/>
+                                </NavLink>
+                            )
                         )
-                    )
-                }
-            </div>
-        </Container>
+                    }
+                </div>
+            </Container>
+        </div>
     );
 }
 

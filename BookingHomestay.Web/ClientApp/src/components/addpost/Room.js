@@ -9,6 +9,10 @@ import Button from '../button/Button';
 import Search from '../search/Search';
 import UploadImage from '../uploadimage/UploadImage';
 import ToastMessage from '../toastmessage/ToastMessage';
+import {categories} from '../navbar/Categories';
+import CategoryInput from '../inputs/CategoryInput';
+import NavMenu from '../navbar/NavMenu';
+import Container from '../Container';
 
 const cx = classNames.bind(styles);
 
@@ -239,345 +243,380 @@ const Room = () => {
     };
 
     return (
-        <div className={cx('wrapper','pt-[250px]')}>
-            <div className={cx('flex', 'justify-center')}>
-                <Search onSearchItemClick={handleSearchItemClick} />
-            </div>
+        <div>
+            <NavMenu/>
+            <Container>
+                <div className={cx('wrapper','pt-[150px]')}>
+                    <div className=' text-2xl font-bold mb-5'>
+                        Thêm mới phòng
+                    </div>
 
-            {/* Map ---*/}
-            <div ref={mapContainerRef} className={cx('map__container', 'shadow-md')} />
-            {/* --- */}
+                    <div className='flex flex-row'>
+                        <div className='flex flex-col'>
+                            <div>
+                                <div className=' font-medium text-balance border-b-[1px]'>
+                                    Nhập địa điểm của phòng bạn
+                                </div>
+                                <Search onSearchItemClick={handleSearchItemClick} />
+                            </div>
+                            {/* Map ---*/}
+                            <div ref={mapContainerRef} className={cx('shadow-md','w-full', 'h-[300px]')} />
+                            {/* --- */}
+                            <div>
+                                <div className=' font-medium text-balance border-b-[1px] mt-[40px]'>
+                                    Chọn các thuộc tính của phòng
+                                </div>
+                                <div className='grid grid-cols-3 md:grid-cols-2 gap-3 max-h-[50vh] overflow-y-auto mt-[40px]'>
+                                    {
+                                        categories.map((item) => (
+                                            <div key={item.label} className='col-span-1'>
+                                                <CategoryInput icon={item.icon} onClick={() =>{}} selected={false} label={item.label}/>
+                                            </div>
+                                        ))
+                                    }
+                                </div>
+                            </div>
+                        </div>
 
-            <div ref={confirmationRef} className={cx('w-[700px]', 'm-auto', 'mt-[40px]')}>
-                <h3 className={cx('pt-[20px]', 'pb-[10px]', 'font-semibold', 'text-black', 'text-[30px]')}>
-                    Xác nhận địa chỉ
-                </h3>
-                <form onSubmit={handleSave} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-                    <div className="mb-[20px]">
-                        <label className="block text-gray-700 text-[18px] font-bold mb-2" htmlFor="addressLine1">
-                            AddressLine1
-                        </label>
-                        <input
-                            className={cx(
-                                'shadow',
-                                'appearance-none',
-                                'border',
-                                'rounded',
-                                'w-full',
-                                'py-3',
-                                'px-3',
-                                'text-gray-700',
-                                'leading-tight',
-                            )}
-                            id="addressLine1"
-                            type="text"
-                            placeholder="Enter AddressLine1"
-                            autoComplete="off"
-                            value={addressLine1}
-                            onChange={handleAddressLine1Change}
-                            required
-                        />
+                        <div ref={confirmationRef} className={cx('min-w-[650px]', 'm-auto', 'mt-[40px]','w-full','px-5')}>
+                            <div className='font-medium text-balance border-b-[1px]'>
+                                Xác nhận địa chỉ
+                            </div>
+                            <form onSubmit={handleSave} className="bg-white px-8 pt-6 pb-8 mb-4">
+                                <div className="mb-[20px]">
+                                    <label className="block text-gray-700 text-[15px] font-bold mb-2" htmlFor="addressLine1">
+                                        Địa chỉ
+                                    </label>
+                                    <input
+                                        className={cx(
+                                            'shadow',
+                                            'appearance-none',
+                                            'border',
+                                            'rounded',
+                                            'w-full',
+                                            'py-2',
+                                            'px-2',
+                                            'text-gray-700',
+                                            'leading-tight',
+                                        )}
+                                        id="addressLine1"
+                                        type="text"
+                                        placeholder="Enter AddressLine1"
+                                        autoComplete="off"
+                                        value={addressLine1}
+                                        onChange={handleAddressLine1Change}
+                                        required
+                                    />
+                                </div>
+                                <div className="mb-[20px]">
+                                    <label className="block text-gray-700 text-[15px] font-bold mb-2" htmlFor="addressLine2">
+                                        Phường/Quận/Huyện, Thành phố, Tỉnh
+                                    </label>
+                                    <input
+                                        className={cx(
+                                            'shadow',
+                                            'appearance-none',
+                                            'border',
+                                            'rounded',
+                                            'w-full',
+                                            'py-2',
+                                            'px-2',
+                                            'text-gray-700',
+                                            'leading-tight',
+                                        )}
+                                        id="addressLine2"
+                                        type="text"
+                                        placeholder="Enter AddressLine2"
+                                        autoComplete="off"
+                                        value={addressLine2}
+                                        onChange={handleAddressLine2Change}
+                                        required
+                                    />
+                                </div>
+                                <div className='flex flex-row'>
+                                <div className="mb-[20px]">
+                                    <label className="block text-gray-700 text-[15px] font-bold mb-2" htmlFor="ward">
+                                        Phường
+                                    </label>
+                                    <input
+                                        className={cx(
+                                            'shadow',
+                                            'appearance-none',
+                                            'border',
+                                            'rounded',
+                                            'w-full',
+                                            'py-2',
+                                            'px-2',
+                                            'text-gray-700',
+                                            'leading-tight',
+                                        )}
+                                        id="ward"
+                                        type="text"
+                                        placeholder="Enter Ward"
+                                        autoComplete="off"
+                                        value={ward}
+                                        onChange={handleWardChange}
+                                        required
+                                    />
+                                </div>
+                                <div className="mb-[20px] ml-5">
+                                    <label className="block text-gray-700 text-[15px] font-bold mb-2" htmlFor="city">
+                                        Thành phố
+                                    </label>
+                                    <input
+                                        className={cx(
+                                            'shadow',
+                                            'appearance-none',
+                                            'border',
+                                            'rounded',
+                                            'w-full',
+                                            'py-2',
+                                            'px-2',
+                                            'text-gray-700',
+                                            'leading-tight',
+                                        )}
+                                        id="city"
+                                        type="text"
+                                        placeholder="Enter City"
+                                        autoComplete="off"
+                                        value={city}
+                                        onChange={handleCityChange}
+                                        required
+                                    />
+                                </div>
+                                </div>
+                                <div className="mb-[20px]">
+                                    <label className="block text-gray-700 text-[15px] font-bold mb-2" htmlFor="province">
+                                        Tỉnh
+                                    </label>
+                                    <input
+                                        className={cx(
+                                            'shadow',
+                                            'appearance-none',
+                                            'border',
+                                            'rounded',
+                                            'w-full',
+                                            'py-2',
+                                            'px-2',
+                                            'text-gray-700',
+                                            'leading-tight',
+                                        )}
+                                        id="province"
+                                        type="text"
+                                        placeholder="Enter Province"
+                                        autoComplete="off"
+                                        value={province}
+                                        onChange={handleProvinceChange}
+                                        required
+                                    />
+                                </div>
+                                <div className="mb-[20px] hidden">
+                                    <label className="block text-gray-700 text-[15px] font-bold mb-2" htmlFor="placeId">
+                                        Place ID
+                                    </label>
+                                    <input
+                                        className={cx(
+                                            'shadow',
+                                            'appearance-none',
+                                            'border',
+                                            'rounded',
+                                            'w-full',
+                                            'py-2',
+                                            'px-2',
+                                            'text-gray-700',
+                                            'leading-tight',
+                                        )}
+                                        id="placeId"
+                                        type="text"
+                                        placeholder="Enter PlaceId"
+                                        autoComplete="off"
+                                        value={placeId}
+                                        // onChange={handlePlaceIdChange}
+                                        required
+                                        readOnly
+                                    />
+                                </div>
+                                <div className="mb-[20px] hidden">
+                                    <label className="block text-gray-700 text-[15px] font-bold mb-2" htmlFor="latitude">
+                                        Vĩ độ
+                                    </label>
+                                    <input
+                                        className={cx(
+                                            'shadow',
+                                            'appearance-none',
+                                            'border',
+                                            'rounded',
+                                            'w-full',
+                                            'py-2',
+                                            'px-2',
+                                            'text-gray-700',
+                                            'leading-tight',
+                                        )}
+                                        id="latitude"
+                                        type="text"
+                                        placeholder="Enter Latitude"
+                                        autoComplete="off"
+                                        value={latitude}
+                                        onChange={handleLatitudeChange}
+                                        required
+                                        readOnly
+                                    />
+                                </div>
+                                <div className="mb-[20px] hidden">
+                                    <label className="block text-gray-700 text-[15px] font-bold mb-2" htmlFor="longitude">
+                                        Kinh độ
+                                    </label>
+                                    <input
+                                        className={cx(
+                                            'shadow',
+                                            'appearance-none',
+                                            'border',
+                                            'rounded',
+                                            'w-full',
+                                            'py-3',
+                                            'px-3',
+                                            'text-gray-700',
+                                            'leading-tight',
+                                        )}
+                                        id="longitude"
+                                        type="text"
+                                        placeholder="Enter longitude"
+                                        autoComplete="off"
+                                        value={longitude}
+                                        onChange={handleLongitudeChange}
+                                        required
+                                        readOnly
+                                    />
+                                </div>
+                                {/*<h3 className={cx('pt-[20px]', 'pb-[10px]', 'font-semibold', 'text-rose-600', 'text-[26px]')}>
+                                    Room
+                                </h3>*/}
+                                <div className="mb-[20px]">
+                                    <label className="block text-gray-700 text-[15px] font-bold mb-2" htmlFor="description">
+                                        Mô tả
+                                    </label>
+                                    <input
+                                        className={cx(
+                                            'shadow',
+                                            'appearance-none',
+                                            'border',
+                                            'rounded',
+                                            'w-full',
+                                            'py-3',
+                                            'px-3',
+                                            'text-gray-700',
+                                            'leading-tight',
+                                        )}
+                                        id="description"
+                                        type="text"
+                                        placeholder="Enter Description"
+                                        autoComplete="off"
+                                        value={description}
+                                        onChange={handleDescriptionChange}
+                                        required
+                                    />
+                                </div>
+                                <div className='flex flex-row'>
+                                    <div className="mb-[20px]">
+                                        <label className="block text-gray-700 text-[15px] font-bold mb-2" htmlFor="area">
+                                            Diện tích
+                                        </label>
+                                        <input
+                                            className={cx(
+                                                'shadow',
+                                                'appearance-none',
+                                                'border',
+                                                'rounded',
+                                                'py-2',
+                                                'px-2',
+                                                'text-gray-700',
+                                                'leading-tight',
+                                            )}
+                                            id="area"
+                                            type="text"
+                                            placeholder="Enter Area"
+                                            autoComplete="off"
+                                            value={area}
+                                            onChange={handleAreaChange}
+                                            required
+                                        />
+                                    </div>
+                                    <div className="mb-[20px] ml-5">
+                                        <label className="block text-gray-700 text-[15px] font-bold mb-2" htmlFor="price">
+                                            Giá
+                                        </label>
+                                        <input
+                                            className={cx(
+                                                'shadow',
+                                                'appearance-none',
+                                                'border',
+                                                'rounded',
+                                                'py-2',
+                                                'px-2',
+                                                'text-gray-700',
+                                                'leading-tight',
+                                            )}
+                                            id="price"
+                                            type="text"
+                                            placeholder="Enter Price"
+                                            autoComplete="off"
+                                            value={price}
+                                            onChange={handlePriceChange}
+                                            required
+                                        />
+                                    </div>
+                                </div>
+                                <div className="mb-[20px]">
+                                    <label className="block text-gray-700 text-[15px] font-bold mb-2" htmlFor="images">
+                                        Ảnh của phòng
+                                    </label>
+                                    <UploadImage onImagesChange={handleImagesChange} images={images} />
+                                </div>
+                                {/*
+                                    <h3 className={cx('pt-[20px]', 'pb-[10px]', 'font-semibold', 'text-rose-600', 'text-[26px]')}>
+                                    Post
+                                </h3>
+                                */}
+                                <div className="mb-[20px]">
+                                    <label className="block text-gray-700 text-[15px] font-bold mb-2" htmlFor="title">
+                                        Tiêu đề
+                                    </label>
+                                    <input
+                                        className={cx(
+                                            'shadow',
+                                            'appearance-none',
+                                            'border',
+                                            'rounded',
+                                            'w-full',
+                                            'py-3',
+                                            'px-3',
+                                            'text-gray-700',
+                                            'leading-tight',
+                                        )}
+                                        id="title"
+                                        type="text"
+                                        placeholder="Enter Title"
+                                        autoComplete="off"
+                                        value={title}
+                                        onChange={handleTitleChange}
+                                        required
+                                    />
+                                </div>
+                                <div className="flex justify-center mt-[16px]">
+                                <button className=" bg-rose-500 p-2 rounded-md font-md text-white w-14" type="submit">Lưu</button>
+                                    <ToastMessage snackbarMessage={snackbarMessage} snackbarSeverity={snackbarSeverity} />
+                                </div>
+                            </form>
+                        </div>
                     </div>
-                    <div className="mb-[20px]">
-                        <label className="block text-gray-700 text-[18px] font-bold mb-2" htmlFor="addressLine2">
-                            AddressLine2
-                        </label>
-                        <input
-                            className={cx(
-                                'shadow',
-                                'appearance-none',
-                                'border',
-                                'rounded',
-                                'w-full',
-                                'py-3',
-                                'px-3',
-                                'text-gray-700',
-                                'leading-tight',
-                            )}
-                            id="addressLine2"
-                            type="text"
-                            placeholder="Enter AddressLine2"
-                            autoComplete="off"
-                            value={addressLine2}
-                            onChange={handleAddressLine2Change}
-                            required
-                        />
-                    </div>
-                    <div className="mb-[20px]">
-                        <label className="block text-gray-700 text-[18px] font-bold mb-2" htmlFor="ward">
-                            Ward
-                        </label>
-                        <input
-                            className={cx(
-                                'shadow',
-                                'appearance-none',
-                                'border',
-                                'rounded',
-                                'w-full',
-                                'py-3',
-                                'px-3',
-                                'text-gray-700',
-                                'leading-tight',
-                            )}
-                            id="ward"
-                            type="text"
-                            placeholder="Enter Ward"
-                            autoComplete="off"
-                            value={ward}
-                            onChange={handleWardChange}
-                            required
-                        />
-                    </div>
-                    <div className="mb-[20px]">
-                        <label className="block text-gray-700 text-[18px] font-bold mb-2" htmlFor="city">
-                            City / District
-                        </label>
-                        <input
-                            className={cx(
-                                'shadow',
-                                'appearance-none',
-                                'border',
-                                'rounded',
-                                'w-full',
-                                'py-3',
-                                'px-3',
-                                'text-gray-700',
-                                'leading-tight',
-                            )}
-                            id="city"
-                            type="text"
-                            placeholder="Enter City"
-                            autoComplete="off"
-                            value={city}
-                            onChange={handleCityChange}
-                            required
-                        />
-                    </div>
-                    <div className="mb-[20px]">
-                        <label className="block text-gray-700 text-[18px] font-bold mb-2" htmlFor="province">
-                            Province
-                        </label>
-                        <input
-                            className={cx(
-                                'shadow',
-                                'appearance-none',
-                                'border',
-                                'rounded',
-                                'w-full',
-                                'py-3',
-                                'px-3',
-                                'text-gray-700',
-                                'leading-tight',
-                            )}
-                            id="province"
-                            type="text"
-                            placeholder="Enter Province"
-                            autoComplete="off"
-                            value={province}
-                            onChange={handleProvinceChange}
-                            required
-                        />
-                    </div>
-                    <div className="mb-[20px]">
-                        <label className="block text-gray-700 text-[18px] font-bold mb-2" htmlFor="placeId">
-                            Place ID
-                        </label>
-                        <input
-                            className={cx(
-                                'shadow',
-                                'appearance-none',
-                                'border',
-                                'rounded',
-                                'w-full',
-                                'py-3',
-                                'px-3',
-                                'text-gray-700',
-                                'leading-tight',
-                            )}
-                            id="placeId"
-                            type="text"
-                            placeholder="Enter PlaceId"
-                            autoComplete="off"
-                            value={placeId}
-                            // onChange={handlePlaceIdChange}
-                            required
-                            readOnly
-                        />
-                    </div>
-                    <div className="mb-[20px]">
-                        <label className="block text-gray-700 text-[18px] font-bold mb-2" htmlFor="latitude">
-                            Latitude
-                        </label>
-                        <input
-                            className={cx(
-                                'shadow',
-                                'appearance-none',
-                                'border',
-                                'rounded',
-                                'w-full',
-                                'py-3',
-                                'px-3',
-                                'text-gray-700',
-                                'leading-tight',
-                            )}
-                            id="latitude"
-                            type="text"
-                            placeholder="Enter Latitude"
-                            autoComplete="off"
-                            value={latitude}
-                            onChange={handleLatitudeChange}
-                            required
-                            readOnly
-                        />
-                    </div>
-                    <div className="mb-[20px]">
-                        <label className="block text-gray-700 text-[18px] font-bold mb-2" htmlFor="longitude">
-                            longitude
-                        </label>
-                        <input
-                            className={cx(
-                                'shadow',
-                                'appearance-none',
-                                'border',
-                                'rounded',
-                                'w-full',
-                                'py-3',
-                                'px-3',
-                                'text-gray-700',
-                                'leading-tight',
-                            )}
-                            id="longitude"
-                            type="text"
-                            placeholder="Enter longitude"
-                            autoComplete="off"
-                            value={longitude}
-                            onChange={handleLongitudeChange}
-                            required
-                            readOnly
-                        />
-                    </div>
-                    {/*<h3 className={cx('pt-[20px]', 'pb-[10px]', 'font-semibold', 'text-rose-600', 'text-[26px]')}>
-                        Room
-                    </h3>*/}
-                    <div className="mb-[20px]">
-                        <label className="block text-gray-700 text-[18px] font-bold mb-2" htmlFor="description">
-                            Description
-                        </label>
-                        <input
-                            className={cx(
-                                'shadow',
-                                'appearance-none',
-                                'border',
-                                'rounded',
-                                'w-full',
-                                'py-3',
-                                'px-3',
-                                'text-gray-700',
-                                'leading-tight',
-                            )}
-                            id="description"
-                            type="text"
-                            placeholder="Enter Description"
-                            autoComplete="off"
-                            value={description}
-                            onChange={handleDescriptionChange}
-                            required
-                        />
-                    </div>
-                    <div className="mb-[20px]">
-                        <label className="block text-gray-700 text-[18px] font-bold mb-2" htmlFor="area">
-                            Area
-                        </label>
-                        <input
-                            className={cx(
-                                'shadow',
-                                'appearance-none',
-                                'border',
-                                'rounded',
-                                'w-full',
-                                'py-3',
-                                'px-3',
-                                'text-gray-700',
-                                'leading-tight',
-                            )}
-                            id="area"
-                            type="text"
-                            placeholder="Enter Area"
-                            autoComplete="off"
-                            value={area}
-                            onChange={handleAreaChange}
-                            required
-                        />
-                    </div>
-                    <div className="mb-[20px]">
-                        <label className="block text-gray-700 text-[18px] font-bold mb-2" htmlFor="price">
-                            Price
-                        </label>
-                        <input
-                            className={cx(
-                                'shadow',
-                                'appearance-none',
-                                'border',
-                                'rounded',
-                                'w-full',
-                                'py-3',
-                                'px-3',
-                                'text-gray-700',
-                                'leading-tight',
-                            )}
-                            id="price"
-                            type="text"
-                            placeholder="Enter Price"
-                            autoComplete="off"
-                            value={price}
-                            onChange={handlePriceChange}
-                            required
-                        />
-                    </div>
-                    <div className="mb-[20px]">
-                        <label className="block text-gray-700 text-[18px] font-bold mb-2" htmlFor="images">
-                            Images
-                        </label>
-                        <UploadImage onImagesChange={handleImagesChange} images={images} />
-                    </div>
-                    {/*
-                        <h3 className={cx('pt-[20px]', 'pb-[10px]', 'font-semibold', 'text-rose-600', 'text-[26px]')}>
-                        Post
-                    </h3>
-                    */}
-                    <div className="mb-[20px]">
-                        <label className="block text-gray-700 text-[18px] font-bold mb-2" htmlFor="title">
-                            Title
-                        </label>
-                        <input
-                            className={cx(
-                                'shadow',
-                                'appearance-none',
-                                'border',
-                                'rounded',
-                                'w-full',
-                                'py-3',
-                                'px-3',
-                                'text-gray-700',
-                                'leading-tight',
-                            )}
-                            id="title"
-                            type="text"
-                            placeholder="Enter Title"
-                            autoComplete="off"
-                            value={title}
-                            onChange={handleTitleChange}
-                            required
-                        />
-                    </div>
-                    <div className="flex justify-center mt-[16px]">
-                        <Button className={cx('bg-blue-500', 'hover:opacity-80', 'text-white')} type="submit">
-                            Save
-                        </Button>
-                        <ToastMessage snackbarMessage={snackbarMessage} snackbarSeverity={snackbarSeverity} />
-                    </div>
-                </form>
-            </div>
+
+                    
+
+                    
+
+                    
+                </div>
+            </Container>
         </div>
     );
 }
