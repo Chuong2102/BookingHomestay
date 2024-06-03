@@ -289,7 +289,7 @@ const Room = () => {
                                     </label>
                                     <input
                                         className={cx(
-                                            'shadow',
+                                            'shadow-sm',
                                             'appearance-none',
                                             'border',
                                             'rounded',
@@ -314,7 +314,7 @@ const Room = () => {
                                     </label>
                                     <input
                                         className={cx(
-                                            'shadow',
+                                            'shadow-sm',
                                             'appearance-none',
                                             'border',
                                             'rounded',
@@ -340,7 +340,7 @@ const Room = () => {
                                     </label>
                                     <input
                                         className={cx(
-                                            'shadow',
+                                            'shadow-sm',
                                             'appearance-none',
                                             'border',
                                             'rounded',
@@ -365,7 +365,7 @@ const Room = () => {
                                     </label>
                                     <input
                                         className={cx(
-                                            'shadow',
+                                            'shadow-sm',
                                             'appearance-none',
                                             'border',
                                             'rounded',
@@ -391,7 +391,7 @@ const Room = () => {
                                     </label>
                                     <input
                                         className={cx(
-                                            'shadow',
+                                            'shadow-sm',
                                             'appearance-none',
                                             'border',
                                             'rounded',
@@ -416,7 +416,7 @@ const Room = () => {
                                     </label>
                                     <input
                                         className={cx(
-                                            'shadow',
+                                            'shadow-sm',
                                             'appearance-none',
                                             'border',
                                             'rounded',
@@ -442,7 +442,7 @@ const Room = () => {
                                     </label>
                                     <input
                                         className={cx(
-                                            'shadow',
+                                            'shadow-sm',
                                             'appearance-none',
                                             'border',
                                             'rounded',
@@ -468,7 +468,7 @@ const Room = () => {
                                     </label>
                                     <input
                                         className={cx(
-                                            'shadow',
+                                            'shadow-sm',
                                             'appearance-none',
                                             'border',
                                             'rounded',
@@ -497,7 +497,7 @@ const Room = () => {
                                     </label>
                                     <input
                                         className={cx(
-                                            'shadow',
+                                            'shadow-sm',
                                             'appearance-none',
                                             'border',
                                             'rounded',
@@ -523,7 +523,7 @@ const Room = () => {
                                         </label>
                                         <input
                                             className={cx(
-                                                'shadow',
+                                                'shadow-sm',
                                                 'appearance-none',
                                                 'border',
                                                 'rounded',
@@ -547,7 +547,7 @@ const Room = () => {
                                         </label>
                                         <input
                                             className={cx(
-                                                'shadow',
+                                                'shadow-sm',
                                                 'appearance-none',
                                                 'border',
                                                 'rounded',
@@ -583,7 +583,7 @@ const Room = () => {
                                     </label>
                                     <input
                                         className={cx(
-                                            'shadow',
+                                            'shadow-sm',
                                             'appearance-none',
                                             'border',
                                             'rounded',

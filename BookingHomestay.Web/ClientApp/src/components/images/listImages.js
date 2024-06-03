@@ -1,88 +1,53 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import ImageList from '@mui/material/ImageList';
-import ImageListItem from '@mui/material/ImageListItem';
-import ImageListItemBar from '@mui/material/ImageListItemBar';
+import {useState} from 'react';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
-export default function TitlebarBelowMasonryImageList() {
+function PhotoGallery() {
+  const [searchMenu, setSearchMenu] = useState(false);
+
+  const showMenu = () => {
+    setSearchMenu((prevState) => !prevState);
+  };
+  
   return (
-    <Box sx={{ width: '100%', height: 450, overflowY: 'scroll' }}>
-      <ImageList variant="masonry" cols={3} gap={8}>
-        {itemData.map((item) => (
-          <ImageListItem key={item.img}>
-            <img
-              srcSet={`${item.img}?fit=crop&auto=format&dpr=2 2x`}
-              src={`${item.img}?fit=crop&auto=format`}
-              alt={item.title}
-              loading="lazy"
-            />
-            <ImageListItemBar position="below" title={item.author} />
-          </ImageListItem>
-        ))}
-      </ImageList>
-    </Box>
+    <div>
+      <div className="imageContainer">
+        <div className="imageFlex ">
+          <img className="leftImg" src="https://airbnb-clone-2021.s3-us-west-1.amazonaws.com/airbnb_fakeImg_left.png?im_w=960" height="530" width="450" alt="missing" />
+        </div>
+
+        <div className="one">
+          <div className="imageFlex">
+            <img src="https://images.unsplash.com/photo-1611212863924-39ea8f8b7f1b?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2467&q=80?im_w=720" width="371" alt="missing" />
+          </div>
+
+          <div className="imageFlex">
+            <img src="https://images.unsplash.com/photo-1600221582796-2355f57762a2?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2704&q=80?im_w=720" width="371" alt="missing" />
+          </div>
+        </div>
+
+        <div className="two">
+          <div className="imageFlex">
+            <img className="rightTopImg" src="https://images.unsplash.com/photo-1598924957326-0446ac30341e?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2534&q=80?im_w=720" width="371.5" alt="missing" />
+          </div>
+
+          <div className="imageFlex">
+            <img className="rightBottomImg" src="https://images.unsplash.com/photo-1576302769468-63842682833e?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2550&q=80?im_w=720" width="371.5" alt="missing" />
+          </div>
+        </div>
+      </div>
+      <div className="show-more-imgs">
+      <Link to="/images">
+        <input type="submit" onClick={showMenu} className={`btn btn-${searchMenu}`} value="Show All Photos" />
+      </Link>
+      </div>
+
+    </div>
   );
 }
 
-const itemData = [
-  {
-    img: 'https://images.unsplash.com/photo-1549388604-817d15aa0110',
-    title: 'Bed',
-    author: 'swabdesign',
-  },
-  {
-    img: 'https://images.unsplash.com/photo-1525097487452-6278ff080c31',
-    title: 'Books',
-    author: 'Pavel Nekoranec',
-  },
-  {
-    img: 'https://images.unsplash.com/photo-1523413651479-597eb2da0ad6',
-    title: 'Sink',
-    author: 'Charles Deluvio',
-  },
-  {
-    img: 'https://images.unsplash.com/photo-1563298723-dcfebaa392e3',
-    title: 'Kitchen',
-    author: 'Christian Mackie',
-  },
-  {
-    img: 'https://images.unsplash.com/photo-1588436706487-9d55d73a39e3',
-    title: 'Blinds',
-    author: 'Darren Richardson',
-  },
-  {
-    img: 'https://images.unsplash.com/photo-1574180045827-681f8a1a9622',
-    title: 'Chairs',
-    author: 'Taylor Simpson',
-  },
-  {
-    img: 'https://images.unsplash.com/photo-1530731141654-5993c3016c77',
-    title: 'Laptop',
-    author: 'Ben Kolde',
-  },
-  {
-    img: 'https://images.unsplash.com/photo-1481277542470-605612bd2d61',
-    title: 'Doors',
-    author: 'Philipp Berndt',
-  },
-  {
-    img: 'https://images.unsplash.com/photo-1517487881594-2787fef5ebf7',
-    title: 'Coffee',
-    author: 'Jen P.',
-  },
-  {
-    img: 'https://images.unsplash.com/photo-1516455207990-7a41ce80f7ee',
-    title: 'Storage',
-    author: 'Douglas Sheppard',
-  },
-  {
-    img: 'https://images.unsplash.com/photo-1597262975002-c5c3b14bbd62',
-    title: 'Candle',
-    author: 'Fi Bell',
-  },
-  {
-    img: 'https://images.unsplash.com/photo-1519710164239-da123dc03ef4',
-    title: 'Coffee table',
-    author: 'Hutomo Abrianto',
-  },
-];
+PhotoGallery.propTypes = {
+  searchMenu: PropTypes.instanceOf(Object).isRequired,
+};
+
+export default PhotoGallery;

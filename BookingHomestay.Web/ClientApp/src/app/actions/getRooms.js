@@ -1,10 +1,16 @@
-export default function getRooms(category){
+export default function getRooms(category, startDate, endDate, guestNumber, latitude, longitude){
     if(category == null)
         category = '';
 
+    if(latitude == null)
+        latitude = 0;
+
+    if(longitude == null)
+        latitude = 0;
+
     const payload = {
-        "latitude": 0,
-        "longitude": 0,
+        "latitude": latitude,
+        "longitude": longitude,
         "categoryName": category
     }
     var rooms = [];
@@ -21,7 +27,7 @@ export default function getRooms(category){
             method: "POST",
             headers: {"Authorization": `Bearer ${token}`},
             body: params,
-        }).then(res => res.json()).then((json) => {return json;});
+        }).then(res => res.json()).then((json) => {console.log(json); return json;});
 
         return data;
     }

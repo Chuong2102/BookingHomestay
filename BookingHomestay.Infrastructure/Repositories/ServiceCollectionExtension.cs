@@ -2,6 +2,7 @@
 using BookingHomestay.Domain.Entities.UserAggregate;
 using BookingHomestay.Domain.Interfaces;
 using BookingHomestay.Infrastructure.Repositories.Authentication;
+using BookingHomestay.Infrastructure.Repositories.Photo;
 using BookingHomestay.Infrastructure.Repositories.User;
 
 namespace BookingHomestay.Infrastructure.Repositories
@@ -15,10 +16,12 @@ namespace BookingHomestay.Infrastructure.Repositories
             services.AddScoped<RepositoryBase<Domain.Entities.UserAggregate.User>>();
 
             services.AddTransient<IRoomRepository, RoomRepository>();
+            services.AddTransient<IPhotoRepository, PhotoRepository>();
             services.AddTransient<IUserRepository, UserRepository>();
 
             services.AddTransient<RepositoryBase<Context.BookingHomestayDbContext>>();
             services.AddSingleton<IJwtTokenGenerator, JwtTokenGenerator>();
+
 
         }
     }

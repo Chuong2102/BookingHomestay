@@ -13,6 +13,7 @@ using Microsoft.OpenApi.Models;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using System.Text;
+using BookingHomestay.API.DTOs;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,8 +24,8 @@ builder.Services.AddTransient<IAuthenticaionService, BookingHomestay.API.Service
 
 builder.Services.RegisterServices();
 
-
 builder.Services.AddControllers();
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 BookingHomestay.Infrastructure.Dependencies.ConfigureServices(builder.Configuration, builder.Services);
 

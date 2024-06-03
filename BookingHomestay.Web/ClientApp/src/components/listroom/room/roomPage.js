@@ -10,7 +10,7 @@ import Comment from '../../Comment';
 import { useSelector, useDispatch } from "react-redux";
 import { onGet, onStopGet } from '../../../redux/getLocationSlice';
 
-const RoomPage = () => {
+const RoomPage = (r) => {
     // redux GET LCOATION
     const isGetLocation= useSelector((state) => state.getLocation.value);
     const dispatch = useDispatch();
@@ -73,7 +73,7 @@ const RoomPage = () => {
                     </div>
                 </div>
                 <hr/>
-                <div className='grid grid-cols-2 pt-2'>
+                <div className='grid grid-cols-2 pt-2 mt-6'>
                     {
                         comment.map(
                             (cmt, index) => (

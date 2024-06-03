@@ -8,6 +8,7 @@ import '@goongmaps/goong-js/dist/goong-js.css';
 import styles from '../addpost/Room.module.scss';
 import axios from 'axios';
 import Counter from '../inputs/Counter';
+import { json, useNavigate } from "react-router-dom";
 
 
 const goongApi_Rob = 'oC8CNdh20xrH8Dpm0SIkZYQqBijW847QWVmBE0DB';
@@ -16,6 +17,12 @@ mapboxgl.accessToken = 'wnicbAmnNkoMHNYUKWnlFHezV189FjmMwkNJ7hKW';
 const cx = classNames.bind(styles);
 
 const Search = () => {
+  const navigate = useNavigate();
+
+  const handleSearch = () => {
+    window.location.reload();
+  }
+
   const handleSearchItemClick = (result) => {
     setPlaceId(result.place_id);
 
@@ -34,6 +41,8 @@ const Search = () => {
   const [longitude, setLongitude] = useState(107.61745585099027);
   const [placeId, setPlaceId] = useState('');
   const [count, setCount] = useState(1);
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
 
   useEffect(() => {
     console.log("load the map");
@@ -106,6 +115,11 @@ const Search = () => {
 
     const onCount = (value) => {
       setCount(value);
+    }
+
+    const onSetDate = (startDate, endDate) => {
+      setStartDate(startDate);
+      setEndDate(endDate);
     }
 
   useEffect(() => {
@@ -219,7 +233,7 @@ const Search = () => {
 
           {isOpenCalender && (
               <div className=' absolute rounded-xl w-full top-20 left-0 right-0 max-w-[450px] md:w-auto shadow-sm mx-auto text-center overflow-hidden text-sm'>
-                  <Calendar/>
+                  <Calendar onChange={(startDate, endDate) => {onSetDate(startDate, endDate)}}/>
               </div>    
           )}
 
@@ -262,7 +276,7 @@ const Search = () => {
             )}  
 
             <div onClick={toggleOpenCounter} className="hidden sm:block">Khách</div>
-            <div className="p-2 bg-rose-500 rounded-full text-white">
+            <div className="p-2 bg-rose-500 rounded-full text-white" onClick={handleSearch}>
               <BiSearch size={18}/>
             </div>
           </div>

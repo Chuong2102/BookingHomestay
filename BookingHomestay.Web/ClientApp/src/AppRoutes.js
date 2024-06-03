@@ -6,6 +6,7 @@ import Room from "./components/addpost/Room";
 import Messenger from "./components/guest/Mesenger";
 import DashboardTabs from "./components/host/Dashboard";
 import Listing from "./components/host/Listing";
+import ManageSpace from "./components/host/ManageSpace";
 import RoomPage from "./components/listroom/room/roomPage";
 import TripDetail from "./components/trips/TripDetail";
 import Trips from "./components/trips/Trips";
@@ -59,6 +60,10 @@ const AppRoutes = [
   {
     path: '/host/listing',
     element: <Listing/>
+  },
+  {
+    path: '/host/manage-space',
+    element: <ManageSpace/>
   }
 ];
 
