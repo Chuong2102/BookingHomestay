@@ -14,6 +14,13 @@ namespace BookingHomestay.Infrastructure.Repositories
             this.dbcontext = context;
         }
 
+        public async Task<int> AddReservation(Reservation reservation)
+        {
+            await dbcontext.Reservations.AddAsync(reservation);
+
+            return 1;
+        }
+
         public async Task<List<Category>> GetAllCategories()
         {
             return await dbcontext.Categories.ToListAsync();

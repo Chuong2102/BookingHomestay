@@ -42,13 +42,10 @@ namespace BookingHomestay.API.Services.Authentication
 
             if(user == null)
             {
-                user = new Domain.Entities.UserAggregate.User
-                {
-                    FullName = payload.Name,
-                    Email = payload.Email,
-                    RegistrationDate = DateTime.UtcNow,
-                    
-                };
+                user = new Domain.Entities.UserAggregate.User(payload.Email, payload.Name, payload.Email);
+                
+
+                await userRepository.AddAsync(user);
             }
 
             return user;

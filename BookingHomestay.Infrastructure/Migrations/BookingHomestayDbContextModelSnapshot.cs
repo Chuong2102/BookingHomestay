@@ -52,7 +52,250 @@ namespace BookingHomestay.Infrastructure.Migrations
 
                     b.HasIndex("RoomID");
 
-                    b.ToTable("Photos");
+                    b.ToTable("Photos", (string)null);
+                });
+
+            modelBuilder.Entity("BookingHomestay.Domain.Entities.OrderAggregate.Merchant", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
+
+                    b.Property<DateTime?>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("LastUpdatedByUserID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("MerchantIpnUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MerchantName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MerchantReturnUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MerchantWeblink")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SecretKey")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool?>("SecretSecret")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("UserID")
+                        .HasColumnType("int");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Merchants", (string)null);
+                });
+
+            modelBuilder.Entity("BookingHomestay.Domain.Entities.OrderAggregate.Payment", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
+
+                    b.Property<DateTime?>("ExpireDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("MerchantID")
+                        .HasColumnType("int");
+
+                    b.Property<decimal?>("PaidAmount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("PaymentContent")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PaymentCurrency")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("PaymentDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("PaymentDesinationID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PaymentLanguages")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PaymentLastMessage")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PaymentRefID")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PaymentStatus")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal?>("RequiredAmount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("MerchantID");
+
+                    b.HasIndex("PaymentDesinationID");
+
+                    b.ToTable("Payments", (string)null);
+                });
+
+            modelBuilder.Entity("BookingHomestay.Domain.Entities.OrderAggregate.PaymentDestination", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
+
+                    b.Property<string>("DesName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DesShortName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("DesSortIndex")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Deslogo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool?>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<int?>("ParentID")
+                        .HasColumnType("int");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("PaymentDestinations", (string)null);
+                });
+
+            modelBuilder.Entity("BookingHomestay.Domain.Entities.OrderAggregate.PaymentNotification", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
+
+                    b.Property<int?>("MerchantID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("NotiAmount")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NotiContent")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("NotiDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("NotiMessege")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("NotiResDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("NotiSignature")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NotiStatus")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("PaymentID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PaymentRefID")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("MerchantID");
+
+                    b.HasIndex("PaymentID");
+
+                    b.ToTable("PaymentNotifications", (string)null);
+                });
+
+            modelBuilder.Entity("BookingHomestay.Domain.Entities.OrderAggregate.PaymentSignature", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
+
+                    b.Property<int?>("PaymentID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SignAglo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("SignDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("SignOwn")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SignValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("PaymentID");
+
+                    b.ToTable("PaymentSignatures", (string)null);
+                });
+
+            modelBuilder.Entity("BookingHomestay.Domain.Entities.OrderAggregate.Transaction", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
+
+                    b.Property<int?>("PaymentID")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ReservationID")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("RoomID")
+                        .HasColumnType("int");
+
+                    b.Property<decimal?>("TranAmount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime?>("TranDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("TranMessage")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TranPayload")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TranStatus")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("PaymentID");
+
+                    b.ToTable("Transactions", (string)null);
                 });
 
             modelBuilder.Entity("BookingHomestay.Domain.Entities.Room.Room", b =>
@@ -66,9 +309,18 @@ namespace BookingHomestay.Infrastructure.Migrations
                     b.Property<double>("Area")
                         .HasColumnType("float");
 
+                    b.Property<int?>("BathRoom")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("BedRoom")
+                        .HasColumnType("int");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("GuestNumber")
+                        .HasColumnType("int");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
@@ -87,7 +339,7 @@ namespace BookingHomestay.Infrastructure.Migrations
 
                     b.HasIndex("ProvinceID");
 
-                    b.ToTable("Rooms");
+                    b.ToTable("Rooms", (string)null);
 
                     b.HasData(
                         new
@@ -150,7 +402,7 @@ namespace BookingHomestay.Infrastructure.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Categories", (string)null);
                 });
 
             modelBuilder.Entity("BookingHomestay.Domain.Entities.RoomAggregate.Comment", b =>
@@ -183,7 +435,7 @@ namespace BookingHomestay.Infrastructure.Migrations
 
                     b.HasIndex("RoomID");
 
-                    b.ToTable("Comments");
+                    b.ToTable("Comments", (string)null);
                 });
 
             modelBuilder.Entity("BookingHomestay.Domain.Entities.RoomAggregate.Province", b =>
@@ -200,7 +452,52 @@ namespace BookingHomestay.Infrastructure.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Provinces");
+                    b.ToTable("Provinces", (string)null);
+                });
+
+            modelBuilder.Entity("BookingHomestay.Domain.Entities.RoomAggregate.Reservation", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
+
+                    b.Property<DateTime?>("CancelDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("CreatedDateTime")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("EndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal?>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal?>("RefundPaid")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("RoomID")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("StartDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal?>("Total")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int?>("UpdatedDateTime")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("UserID")
+                        .HasColumnType("int");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("RoomID");
+
+                    b.ToTable("Reservations", (string)null);
                 });
 
             modelBuilder.Entity("BookingHomestay.Domain.Entities.UserAggregate.Role", b =>
@@ -221,7 +518,7 @@ namespace BookingHomestay.Infrastructure.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Roles");
+                    b.ToTable("Roles", (string)null);
                 });
 
             modelBuilder.Entity("BookingHomestay.Domain.Entities.UserAggregate.User", b =>
@@ -247,15 +544,12 @@ namespace BookingHomestay.Infrastructure.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Password")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PasswordHash")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhoneNumber")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool?>("PhoneNumberConfirmed")
@@ -281,7 +575,7 @@ namespace BookingHomestay.Infrastructure.Migrations
 
                     b.HasIndex("RoleID");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("CategoryRoom", b =>
@@ -296,7 +590,7 @@ namespace BookingHomestay.Infrastructure.Migrations
 
                     b.HasIndex("RoomsID");
 
-                    b.ToTable("CategoryRoom");
+                    b.ToTable("CategoryRoom", (string)null);
                 });
 
             modelBuilder.Entity("BookingHomestay.Domain.Entities.CommonEnities.Photo", b =>
@@ -308,13 +602,61 @@ namespace BookingHomestay.Infrastructure.Migrations
                     b.Navigation("Room");
                 });
 
+            modelBuilder.Entity("BookingHomestay.Domain.Entities.OrderAggregate.Payment", b =>
+                {
+                    b.HasOne("BookingHomestay.Domain.Entities.OrderAggregate.Merchant", "Merchant")
+                        .WithMany()
+                        .HasForeignKey("MerchantID");
+
+                    b.HasOne("BookingHomestay.Domain.Entities.OrderAggregate.PaymentDestination", "PaymentDesination")
+                        .WithMany()
+                        .HasForeignKey("PaymentDesinationID");
+
+                    b.Navigation("Merchant");
+
+                    b.Navigation("PaymentDesination");
+                });
+
+            modelBuilder.Entity("BookingHomestay.Domain.Entities.OrderAggregate.PaymentNotification", b =>
+                {
+                    b.HasOne("BookingHomestay.Domain.Entities.OrderAggregate.Merchant", "Merchant")
+                        .WithMany()
+                        .HasForeignKey("MerchantID");
+
+                    b.HasOne("BookingHomestay.Domain.Entities.OrderAggregate.Payment", "Payment")
+                        .WithMany()
+                        .HasForeignKey("PaymentID");
+
+                    b.Navigation("Merchant");
+
+                    b.Navigation("Payment");
+                });
+
+            modelBuilder.Entity("BookingHomestay.Domain.Entities.OrderAggregate.PaymentSignature", b =>
+                {
+                    b.HasOne("BookingHomestay.Domain.Entities.OrderAggregate.Payment", "Payment")
+                        .WithMany()
+                        .HasForeignKey("PaymentID");
+
+                    b.Navigation("Payment");
+                });
+
+            modelBuilder.Entity("BookingHomestay.Domain.Entities.OrderAggregate.Transaction", b =>
+                {
+                    b.HasOne("BookingHomestay.Domain.Entities.OrderAggregate.Payment", "Payment")
+                        .WithMany()
+                        .HasForeignKey("PaymentID");
+
+                    b.Navigation("Payment");
+                });
+
             modelBuilder.Entity("BookingHomestay.Domain.Entities.Room.Room", b =>
                 {
                     b.HasOne("BookingHomestay.Domain.Entities.RoomAggregate.Province", "Province")
                         .WithMany()
                         .HasForeignKey("ProvinceID");
 
-                    b.OwnsOne("BookingHomestay.Domain.Entities.Room.Address", "Address", b1 =>
+                    b.OwnsOne("BookingHomestay.Domain.Entities.Room.Room.Address#BookingHomestay.Domain.Entities.Room.Address", "Address", b1 =>
                         {
                             b1.Property<int>("RoomID")
                                 .HasColumnType("int");
@@ -335,7 +677,7 @@ namespace BookingHomestay.Infrastructure.Migrations
 
                             b1.HasKey("RoomID");
 
-                            b1.ToTable("Rooms");
+                            b1.ToTable("Rooms", (string)null);
 
                             b1.WithOwner()
                                 .HasForeignKey("RoomID");
@@ -375,7 +717,7 @@ namespace BookingHomestay.Infrastructure.Migrations
                                 });
                         });
 
-                    b.OwnsOne("BookingHomestay.Domain.Entities.RoomAggregate.Location", "Location", b1 =>
+                    b.OwnsOne("BookingHomestay.Domain.Entities.Room.Room.Location#BookingHomestay.Domain.Entities.RoomAggregate.Location", "Location", b1 =>
                         {
                             b1.Property<int>("RoomID")
                                 .HasColumnType("int");
@@ -394,7 +736,7 @@ namespace BookingHomestay.Infrastructure.Migrations
 
                             b1.HasKey("RoomID");
 
-                            b1.ToTable("Rooms");
+                            b1.ToTable("Rooms", (string)null);
 
                             b1.WithOwner()
                                 .HasForeignKey("RoomID");
@@ -442,6 +784,17 @@ namespace BookingHomestay.Infrastructure.Migrations
                     b.HasOne("BookingHomestay.Domain.Entities.Room.Room", "Room")
                         .WithMany()
                         .HasForeignKey("RoomID");
+
+                    b.Navigation("Room");
+                });
+
+            modelBuilder.Entity("BookingHomestay.Domain.Entities.RoomAggregate.Reservation", b =>
+                {
+                    b.HasOne("BookingHomestay.Domain.Entities.Room.Room", "Room")
+                        .WithMany()
+                        .HasForeignKey("RoomID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Room");
                 });

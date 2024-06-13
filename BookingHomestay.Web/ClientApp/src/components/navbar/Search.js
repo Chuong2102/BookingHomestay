@@ -9,6 +9,9 @@ import styles from '../addpost/Room.module.scss';
 import axios from 'axios';
 import Counter from '../inputs/Counter';
 import { json, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { onGet, onStopGet } from '../../redux/getRoomsSlice';
+import store from '../../globalState/StoreRoom';
 
 
 const goongApi_Rob = 'oC8CNdh20xrH8Dpm0SIkZYQqBijW847QWVmBE0DB';
@@ -19,8 +22,11 @@ const cx = classNames.bind(styles);
 const Search = () => {
   const navigate = useNavigate();
 
+  const isGetRoom= useSelector((state) => state.getRooms.value);
+  const dispatch = useDispatch();
+
   const handleSearch = () => {
-    window.location.reload();
+    dispatch(onGet(true));
   }
 
   const handleSearchItemClick = (result) => {
@@ -43,6 +49,15 @@ const Search = () => {
   const [count, setCount] = useState(1);
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
+
+  // Global state
+  const [_latitude, _setLatitude] = store.useState("latitude");
+  const [_longitude, _setLongitude] = store.useState("longitude");
+  const [_count, _setCount] = store.useState("count");
+  const [_startDate, _setStartDate] = store.useState("startDate");
+  const [_endDate, _setEndDate] = store.useState("endDate");
+
+  
 
   useEffect(() => {
     console.log("load the map");
@@ -111,15 +126,28 @@ const Search = () => {
       const lngLat = markerRef.current.getLngLat();
       setLatitude(lngLat.lat);
       setLongitude(lngLat.lng);
+      // set Global state
+      _setLatitude(lngLat.lat);
+      _setLongitude(lngLat.lng);
     }
 
     const onCount = (value) => {
       setCount(value);
+      // Set Global state
+      _setCount(value);
     }
 
     const onSetDate = (startDate, endDate) => {
+
       setStartDate(startDate);
       setEndDate(endDate);
+      // Set global state
+
+      console.log(startDate);
+      console.log(endDate);
+      
+      _setStartDate(startDate.toString());
+      _setEndDate(endDate.toString());
     }
 
   useEffect(() => {
@@ -148,6 +176,10 @@ const Search = () => {
 
             setLatitude(response.data.result.geometry.location.lat);
             setLongitude(response.data.result.geometry.location.lng);
+            // Set global state
+            _setLatitude(response.data.result.geometry.location.lat);
+            _setLongitude(response.data.result.geometry.location.lng);
+
         } catch (error) {
             console.error(error);
         }
@@ -233,7 +265,7 @@ const Search = () => {
 
           {isOpenCalender && (
               <div className=' absolute rounded-xl w-full top-20 left-0 right-0 max-w-[450px] md:w-auto shadow-sm mx-auto text-center overflow-hidden text-sm'>
-                  <Calendar onChange={(startDate, endDate) => {onSetDate(startDate, endDate)}}/>
+                  <Calendar value={{startDate: startDate, endDate: endDate}} onChange={(startDate, endDate) => {onSetDate(startDate, endDate)}}/>
               </div>    
           )}
 

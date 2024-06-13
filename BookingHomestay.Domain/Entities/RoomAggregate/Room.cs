@@ -68,5 +68,8 @@ namespace BookingHomestay.Domain.Entities.Room
         public Location? Location { get; set; }
         public Province? Province { get; set; }
         public virtual ICollection<Category>? Categories { get; set; }
+        public int? BedRoom { get; set; }
+        public int? BathRoom { get; set; }
+        public int? GuestNumber { get; set; }
     }
 }

@@ -7,6 +7,7 @@ namespace BookingHomestay.API.Services.Room
     public interface IRoomService
     {
         Task<int> AddRoom(RoomAddDTO roomDTO);
+        Task<int> AddReservation(Reservation reservation);
         Task<List<BookingHomestay.Domain.Entities.Room.Room>> GetAllRoomsAsync();
         Task<List<BookingHomestay.Domain.Entities.Room.Room>> GetAllRoomsAsync(RoomSearchDTO payload);
         Task<Domain.Entities.Room.Room> GetRoomAsync(int id);

@@ -11,7 +11,10 @@ export default function getRooms(category, startDate, endDate, guestNumber, lati
     const payload = {
         "latitude": latitude,
         "longitude": longitude,
-        "categoryName": category
+        "categoryName": category,
+        "startDate": startDate,
+        "endDate": endDate,
+        "guestNumber": guestNumber
     }
     var rooms = [];
     const apiEx = `https://localhost:7188/api/v1/SearchRooms`;

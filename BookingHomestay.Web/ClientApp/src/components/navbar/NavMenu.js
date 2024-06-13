@@ -37,7 +37,9 @@ export class NavMenu extends Component {
 
           <Container>
             <div className='flex flex-row items-center justify-between gap-3 md:gap-0'>
-              <Logo/>
+              <a href='/home'>
+                <Logo/>
+              </a>
               <Search/>
               <UserMenu/>
             </div>

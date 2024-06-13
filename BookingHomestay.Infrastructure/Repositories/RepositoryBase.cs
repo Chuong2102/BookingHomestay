@@ -9,45 +9,48 @@ namespace BookingHomestay.Infrastructure.Repositories
 {
     public class RepositoryBase<T> : IAsyncRepository<T> where T : class
     {
-        readonly DbSet<T> dbContext;
+        readonly BookingHomestayDbContext dbContext;
 
         public RepositoryBase(BookingHomestayDbContext dbContext)
         {
-            this.dbContext = dbContext.Set<T>();
+            this.dbContext = dbContext;
         }
 
         public async Task<T> AddAsync(T entity)
         {
-            await dbContext.AddAsync(entity);
+            var _entity = await dbContext.Set<T>().AddAsync(entity);
+            await dbContext.SaveChangesAsync();
 
-            return entity;
+            return _entity.Entity;
         }
 
         public Task<bool> DeleteAsync(T entity)
         {
-            dbContext.Remove(entity);
+            dbContext.Set<T>().Remove(entity);
+            dbContext.SaveChanges();
 
             return Task.FromResult(true);
         }
 
         public async Task<List<T>> GetAllAsync(Expression<Func<T, bool>> expression)
         {
-            return await dbContext.Where(expression).ToListAsync();
+            return await dbContext.Set<T>().Where(expression).ToListAsync();
         }
 
         public async Task<List<T>> GetAllAsync()
         {
-            return await dbContext.ToListAsync();
+            return await dbContext.Set<T>().ToListAsync();
         }
 
         public async Task<T> GetAsync(Expression<Func<T, bool>> expression)
         {
-            return await dbContext.FirstOrDefaultAsync(expression);
+            return await dbContext.Set<T>().FirstOrDefaultAsync(expression);
         }
 
         public Task<T> UpdateAsync(T entity)
         {
-            dbContext.Update(entity);
+            dbContext.Set<T>().Update(entity);
+            dbContext.SaveChanges();
             return Task.FromResult(entity);
         }
 

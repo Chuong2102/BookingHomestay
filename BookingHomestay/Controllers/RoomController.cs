@@ -3,7 +3,9 @@ using BookingHomestay.API.DTOs;
 using BookingHomestay.API.Services.Room;
 using BookingHomestay.Domain.Entities.Room;
 using BookingHomestay.Domain.Entities.RoomAggregate;
+using BookingHomestay.Infrastructure.Repositories;
 using BookingHomestay.Infrastructure.Repositories.Photo;
+using BookingHomestay.Infrastructure.Repositories.User;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -17,16 +19,47 @@ namespace BookingHomestay.API.Controllers
         IRoomService roomService;
         IPhotoRepository photoRepository;
         IMapper mapper;
+        IUserRepository userRepository;
+        IRoomRepository roomRepository;
 
-
-        public RoomController(IRoomService roomService, IMapper _mapper, IPhotoRepository _photoRepository)
+        public RoomController(IRoomService roomService, IMapper _mapper,
+            IPhotoRepository _photoRepository, IUserRepository userRepository, IRoomRepository roomRepository)
         {
             this.roomService = roomService;
             mapper = _mapper;
             this.photoRepository = _photoRepository;
+            this.userRepository = userRepository;
+            this.roomRepository = roomRepository;
         }
 
-        [Authorize]
+        [HttpPost]
+        [Route("AddReservation")]
+        public async Task<int> AddReservation(ReservationAddDTO payload)
+        {
+            var user = await userRepository.GetAsync(u => u.Email == payload.Username);
+            var room = await roomRepository.GetAsync(r => r.ID == payload.RoomID);
+
+            try
+            {
+                await roomService.AddReservation(new Reservation
+                {
+                    UserID = user.ID,
+                    Room = room,
+                    StartDate = payload.StartDate,
+                    EndDate = payload.EndDate,
+                    Price = payload.Price,
+                    Total = payload.Total
+
+                });
+
+                return 1;
+            }
+            catch(Exception ex)
+            {
+                return -1;
+            }
+        }
+
         [HttpPost]
         [Route("Rooms")]
         public async Task<List<Room>> GetAllRooms()
@@ -65,7 +98,6 @@ namespace BookingHomestay.API.Controllers
             return result;
         }
 
-        [Authorize]
         [Route("Room")]
         [HttpGet]
         public async Task<GetRoomsDTO> GetRoomByID(int id)

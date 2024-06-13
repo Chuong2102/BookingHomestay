@@ -64,6 +64,9 @@ namespace BookingHomestay.API.Controllers
                 var payload = GoogleJsonWebSignature.ValidateAsync(token.credential, new GoogleJsonWebSignature.ValidationSettings()).Result;
                 var user = await authenticaionService.Authenticate(payload);
 
+                //
+
+
                 var claims = new[]
                 {
                     new Claim(JwtRegisteredClaimNames.Sub, user.ID.ToString()),
@@ -85,7 +88,8 @@ namespace BookingHomestay.API.Controllers
                     signingCredentials: creds);
                 return Ok(new
                 {
-                    token = new JwtSecurityTokenHandler().WriteToken(jwtToken)
+                    token = new JwtSecurityTokenHandler().WriteToken(jwtToken),
+                    username = user.Email
                 });
 
             }

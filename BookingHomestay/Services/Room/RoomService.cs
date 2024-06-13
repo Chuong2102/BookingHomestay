@@ -88,14 +88,56 @@ namespace BookingHomestay.API.Services.Room
 
             var category = await roomRepository.GetCategoryByName(payload.CategoryName);
 
-            var rooms = await roomRepository.GetAllAsync(r => r.Categories.Contains(category));
+            List<Domain.Entities.Room.Room> rooms = new List<Domain.Entities.Room.Room>();
 
-            return rooms;
+            if (category != null)
+            {
+                rooms = await roomRepository.GetAllAsync(r => r.Categories.Contains(category) && r.GuestNumber >= payload.GuestNumber);
+            }
+            else
+            {
+                rooms = await roomRepository.GetAllAsync(r => r.GuestNumber >= payload.GuestNumber);
+            }
+
+            // Order by location
+
+            List<Domain.Entities.Room.Room> result = new List<Domain.Entities.Room.Room>();
+
+            foreach (var room in rooms)
+            {
+                var point = new Point(new Coordinate((double)room.Location.Latitude, (double)room.Location.Longitude));
+                var distanceOp = new DistanceOp(point, new Point(payload.Latitude, payload.Longitude));
+                var distance = distanceOp.Distance();
+
+                // Tim trong ban kinh 5km
+                if (distance < 5)
+                    result.Add(room);
+
+            }
+
+            return result;
         }
 
         public Task<List<Comment>> GetAllCommentByRoom(int roomID)
         {
             return roomRepository.GetCommentByRoomID(roomID);
+        }
+
+        public async Task<int> AddReservation(Reservation reservation)
+        {
+            int result = 1;
+
+            try
+            {
+                await roomRepository.AddReservation(reservation);
+
+                result = 1;
+            }
+            catch (Exception ex)
+            {
+                result = 0;
+            }
+            return result;
         }
     }
 }

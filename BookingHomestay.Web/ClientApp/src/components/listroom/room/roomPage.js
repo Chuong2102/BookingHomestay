@@ -9,6 +9,7 @@ import RoomReservation from './RoomServation';
 import Comment from '../../Comment';
 import { useSelector, useDispatch } from "react-redux";
 import { onGet, onStopGet } from '../../../redux/getLocationSlice';
+import NavMenu from '../../navbar/NavMenu';
 
 const RoomPage = (r) => {
     // redux GET LCOATION
@@ -55,37 +56,40 @@ const RoomPage = (r) => {
     }, [id]);
 
     return(
-        <Container>
-            <div className='pt-[250px] max-w-screen-lg mx-auto'>
-                <div className='flex flex-col gap-6 pb-2'>
+        <div>
+            <NavMenu/>
+            <Container>
+                <div className='pt-[250px] max-w-screen-lg mx-auto'>
+                    <div className='flex flex-col gap-6 pb-2'>
 
-                    <RoomHead title = {room.title} id={room.id} imageSrc={imgSrc} userID={room.userID}/>
-                    <div className='w-full'>
-                        <TitlebarBelowMasonryImageList className="w-full"/>
-                    </div>
-                    <div className='grid grid-cols-1 md:grid-cols-7 md:gap-10 mt-6'>
-                        {isGetLocation && (
-                            <RoomInfo category={room.category} location={room.location}/>
-                        )}
-                        <div className='mb-10 md:order-last md:col-span-3'>
-                            <RoomReservation price={room.price} />
+                        <RoomHead title = {room.title} id={room.id} imageSrc={imgSrc} userID={room.userID}/>
+                        <div className='w-full'>
+                            <TitlebarBelowMasonryImageList listPhotos={room.photoPaths} className="w-full"/>
+                        </div>
+                        <div className='grid grid-cols-1 md:grid-cols-7 md:gap-10 mt-6'>
+                            {isGetLocation && (
+                                <RoomInfo category={room.category} location={room.location}/>
+                            )}
+                            <div className='mb-10 md:order-last md:col-span-3'>
+                                <RoomReservation room={room} />
+                            </div>
                         </div>
                     </div>
-                </div>
-                <hr/>
-                <div className='grid grid-cols-2 pt-2 mt-6'>
-                    {
-                        comment.map(
-                            (cmt, index) => (
-                                <div className='flex flex-col gap-3 pr-5'>
-                                    <Comment cmt={cmt}/>
-                                </div>
+                    <hr/>
+                    <div className='grid grid-cols-2 pt-2 mt-6'>
+                        {
+                            comment.map(
+                                (cmt, index) => (
+                                    <div className='flex flex-col gap-3 pr-5'>
+                                        <Comment cmt={cmt}/>
+                                    </div>
+                                )
                             )
-                        )
-                    }
+                        }
+                    </div>
                 </div>
-            </div>
-        </Container>
+            </Container>
+        </div>
     );
 }
 

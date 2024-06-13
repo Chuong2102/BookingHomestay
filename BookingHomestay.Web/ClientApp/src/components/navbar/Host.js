@@ -13,7 +13,6 @@ const Host = () => {
             <div className=" flex flex-row items-center overflow-x-auto">
                 <HostBox label={'Hôm nay'} name={'today'} />
                 <HostBox label={'Nhà/phòng cho thuê'} name={'listing'} />
-                <HostBox label={'Hộp thư đến'} name={'inbox'} selected={true} />
             </div>  
         </Container>
     );

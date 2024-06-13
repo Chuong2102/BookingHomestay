@@ -48,55 +48,21 @@ const LoginModel = () => {
             r.json().then(user => {
                 // Get token
                 const token = user.token;
+                console.log(user);
 
                 // Save the jwt token
                 localStorage.setItem("jwtToken", token);
+                localStorage.setItem("username", user.username);
                 // Open message dialog
                 toast.success("Đăng nhập thành công!");
                 // Navigate to Home
                 usenavigate("/home");
                 // Close the model
                 dispatch(onClose(false));
-
-                console.log(token);
-
-                handleReloadPage();
             });
           })
       };
 
-    const login = useGoogleLogin({
-        onSuccess: (codeResponse) => {
-            console.log("Start login by Google");
-            console.log(codeResponse);
-            setUser(codeResponse); 
-            localStorage.setItem("jwtToken", user.access_token);
-
-            // Request to server
-            const tokenBlob = new Blob([JSON.stringify({ access_token: user.access_token }, null, 2)], { type: 'application/json' });
-            const options = {
-                method: 'POST',
-                body: tokenBlob,
-                mode: 'cors',
-                cache: 'default'
-            };
-
-            fetch("https://localhost:7188/api/v1/google", options)
-                .then(res => res.json()).then(json => {
-                    
-
-                    console.log(json)
-                });
-            
-            //const access_token = localStorage.getItem('jwtToken');
-            
-            // axios.post("https://localhost:7188/api/v1/google", JSON.stringify(access_token))
-            //     .then((res) => {console.log(res)})
-            //     .catch((error) => {console.log(error)});
-
-        },
-        onError: (error) => console.log('Login Failed:', error)
-    });
 
     useEffect(
         () => {

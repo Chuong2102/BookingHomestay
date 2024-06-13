@@ -436,7 +436,7 @@ const Room = () => {
                                         readOnly
                                     />
                                 </div>
-                                <div className="mb-[20px] hidden">
+                                <div className="mb-[20px]">
                                     <label className="block text-gray-700 text-[15px] font-bold mb-2" htmlFor="latitude">
                                         Vĩ độ
                                     </label>
@@ -462,7 +462,7 @@ const Room = () => {
                                         readOnly
                                     />
                                 </div>
-                                <div className="mb-[20px] hidden">
+                                <div className="mb-[20px]">
                                     <label className="block text-gray-700 text-[15px] font-bold mb-2" htmlFor="longitude">
                                         Kinh độ
                                     </label>
@@ -603,7 +603,9 @@ const Room = () => {
                                     />
                                 </div>
                                 <div className="flex justify-center mt-[16px]">
-                                <button className=" bg-rose-500 p-2 rounded-md font-md text-white w-14" type="submit">Lưu</button>
+                                <a href='/home'>
+                                    <button className=" bg-rose-500 p-2 rounded-md font-md text-white w-14" type="submit">Lưu</button>
+                                </a>
                                     <ToastMessage snackbarMessage={snackbarMessage} snackbarSeverity={snackbarSeverity} />
                                 </div>
                             </form>

@@ -13,9 +13,20 @@ import getRooms from '../app/actions/getRooms';
 import { useSelector, useDispatch } from "react-redux";
 import { onGet, onStopGet } from '../redux/getRoomsSlice';
 import NavMenu from './navbar/NavMenu';
+import {createStore } from 'state-pool';
+import store from '../globalState/StoreRoom';
+
+
 
 const Home = () => {
+    // Global state
+    const [latitude] = store.useState("latitude");
+    const [longitude] = store.useState("longitude");
+    const [count] = store.useState("count");
+    const [startDate] = store.useState("startDate");
+    const [endDate] = store.useState("endDate");
 
+    // Local state
     const [rooms, setRooms] = useState([]);
     const [page, setPage] = useState(1);
     const apiEx = `https://localhost:7188/api/v1/SearchRooms`;
@@ -32,7 +43,7 @@ const Home = () => {
         
         console.log(category);
 
-        const r = await getRooms(category);
+        const r = await getRooms(category, new Date(startDate), new Date(endDate), count, latitude, longitude);
         setRooms(r);
     }
 

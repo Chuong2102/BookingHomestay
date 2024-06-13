@@ -100,16 +100,13 @@ const RoomInfo = (room) => {
                 </div>
                 <div className="flex flex-row items-center gap-4 font-light text-neutral-500">
                     <div>
-                        3 Khách
+                        1 Phòng ngủ
                     </div>
                     <div>
-                        3 Phòng ngủ
+                        1 Giường
                     </div>
                     <div>
-                        8 Giường
-                    </div>
-                    <div>
-                        9 Phòng tắm
+                        1 Phòng tắm
                     </div>
                 </div>
 
@@ -122,10 +119,7 @@ const RoomInfo = (room) => {
             }
             <hr/>
             <div className='text-lg font-light text-neutral-800'>
-            Cabin hai phòng ngủ mới được xây dựng là một công trình kiến trúc hiện đại giữa thế kỷ.
-             Nằm trên đỉnh đồi, chỗ ở có tầm nhìn bao quát 360 độ về Núi Batulao hoàng hôn tuyệt đẹp, làm dịu Vịnh Balayan và các vùng đất nông nghiệp tươi đẹp của Nasugbu.
-             Địa hình và độ cao độc đáo của nó cho phép khách ôm theo gió núi trong lành và thời tiết mát mẻ thực tế quanh năm. 
-             Bằng cách kết hợp vẻ đẹp thô sơ của vùng nông thôn và sự thoải mái của khách sạn boutique, cabin mang đến trải nghiệm R & R được xác định lại.
+                {room.description}
             </div>
             {/* Map ---*/}
             <div ref={mapContainerRef} className={cx('map__container', 'shadow-md')} />
